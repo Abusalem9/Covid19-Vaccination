@@ -27,6 +27,7 @@ public class User {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "refId", referencedColumnName = "refId")
+    @JoinColumn(name = "refIdOfProof", referencedColumnName = "refId")
     private IdProof refIdOfProof;
+
 }

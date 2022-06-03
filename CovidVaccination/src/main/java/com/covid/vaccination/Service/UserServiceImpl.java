@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUserById(Integer id) throws UserException {
-        return p.findById(id).orElseThrow(() -> new UserException("Student does not exist with Roll :"+id));
+        return p.findById(id).orElseThrow(() -> new UserException("User does not exist with Roll :"+id));
     }
 
     @Override
