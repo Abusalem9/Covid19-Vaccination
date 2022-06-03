@@ -9,18 +9,12 @@ import javax.persistence.*;
 @Table(name = "idproof")
 public class IdProof {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 
     private Integer refId;
     private String aadharNo;
     @OneToOne(mappedBy = "refIdOfProof")
     private User user;
 
-    public Integer getRefId() {
-        return refId;
-    }
 
-    public void setRefId(Integer refId) {
-        this.refId = user.getId();
-    }
 }
