@@ -1,5 +1,7 @@
 package com.covid.vaccination.Entity;
 import lombok.*;
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
@@ -13,7 +15,7 @@ public class User {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Integer mobile;
+    private String mobile;
     private Date Dob;
     private String Gender;
 }
