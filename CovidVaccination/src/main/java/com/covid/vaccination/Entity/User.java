@@ -1,6 +1,9 @@
 package com.covid.vaccination.Entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,4 +26,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "refId", referencedColumnName = "refId")
+    private IdProof refIdOfProof;
 }
