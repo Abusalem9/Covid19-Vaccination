@@ -33,5 +33,4 @@ public class User {
     @PrimaryKeyJoinColumn
     @JsonIgnore
     private IdProof idProof;
-
 }

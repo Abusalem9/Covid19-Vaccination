@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,12 +24,12 @@ public class UserServiceImpl implements UserService {
     private GetCurrentLoginUserSessionDetailsImpl getCurrentLoginUser;
 
     @Override
-    public User saveUser(User user) {
-        return p.save(user);
+    public void saveUser(User user) {
+        p.save(user);
     }
 
     @Override
-    @Query("select u.firstName from User as u")
+    @Query("select u from User as u")
     public User getUserById(Integer id) throws UserException {
         return p.findById(id).orElseThrow(() -> new UserException("User does not exist with Roll :" + id));
     }
@@ -36,17 +37,25 @@ public class UserServiceImpl implements UserService {
     @Override
 
     public List<User> getAllUsers() throws UserException {
-        return null;
+        return p.findAll();
     }
 
     @Override
-    public User deleteUserByRId(Integer id) throws UserException {
-        return null;
+    public User deleteUserById(Integer id) throws UserException {
+        User existingUser= p.findById(id).orElseThrow( () -> new UserException("User does not exist with this Id :"+id) );
+        p.delete(existingUser);
+        return existingUser;
     }
 
     @Override
     public User updateUser(User user) throws UserException {
-        return null;
+        Optional<User> opt= p.findById(user.getUser_id());
+        if(opt.isPresent()) {
+            User existingUser= opt.get();
+            return p.save(user);
+        }
+        else
+            throw new UserException("Invalid User Details..");
     }
 
     @Override
