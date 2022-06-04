@@ -2,6 +2,8 @@ package com.covid.vaccination.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,10 +18,10 @@ import java.util.Date;
 @ToString
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties
 public class User {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
     @NotBlank
     private String firstName;
@@ -41,12 +43,10 @@ public class User {
     private String email;
     @NotBlank
     private String gender;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Address address;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private IdProof idProof;
 }

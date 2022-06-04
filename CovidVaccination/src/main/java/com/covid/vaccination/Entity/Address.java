@@ -1,5 +1,6 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,14 +9,13 @@ import javax.persistence.*;
 @Table(name = "address")
 public class Address {
     @Id
-    @Column(name = "address_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer address_id;
     private String city;
     private String state;
     private String pinCode;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "address_id")
+   @OneToOne(mappedBy = "address")
+   @JsonBackReference
     private User user;
 }

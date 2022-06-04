@@ -1,19 +1,19 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "idproof")
 public class IdProof {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer refId;
     private String aadharNo;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "refid")
+   @OneToOne(mappedBy = "idProof")
+   @JsonBackReference
     private User user;
 
 
