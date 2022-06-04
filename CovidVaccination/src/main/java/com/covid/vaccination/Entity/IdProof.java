@@ -12,9 +12,8 @@ public class IdProof {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer refId;
     private String aadharNo;
-   @OneToOne(mappedBy = "idProof")
-   @JsonBackReference
+    private String panCardNo;
+    @OneToOne(mappedBy = "idProof")
+    @JsonBackReference
     private User user;
-
-
 }
