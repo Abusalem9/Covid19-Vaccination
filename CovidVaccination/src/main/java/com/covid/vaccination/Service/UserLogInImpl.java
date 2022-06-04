@@ -31,10 +31,10 @@ public class UserLogInImpl implements UserLogIn {
 
     @Override
     public String logIntoAccount(UserDTO userDTO) {
-        Optional<User> opt = userDao.findByMobile(userDTO.getMobileNo());
+        Optional<User> opt = userDao.findByMobile(userDTO.getMobile());
         User user = opt.get();
 
-        Integer Id = user.getId();
+        Integer Id = user.getUser_id();
 
         Optional<CurrentUserSession> currentUserOptional = sessionDAO.findById(Id);
 
@@ -50,7 +50,7 @@ public class UserLogInImpl implements UserLogIn {
 
             String key = RandomString.make(6);
 
-            CurrentUserSession currentUserSession = new CurrentUserSession(user.getId(), key, LocalDateTime.now());
+            CurrentUserSession currentUserSession = new CurrentUserSession(user.getUser_id(), key, LocalDateTime.now());
             sessionDAO.save(currentUserSession);
 
             return currentUserSession.toString();
