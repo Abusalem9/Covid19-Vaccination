@@ -1,5 +1,6 @@
 package com.covid.vaccination.Contider;
 
+import com.covid.vaccination.DTO.BasicUserDetails;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Repository.UserRepository;
 import com.covid.vaccination.Service.UserServiceImpl;
@@ -33,5 +34,13 @@ public class UserController {
     @GetMapping("/url")
     public Optional<User> getallfromme(){
         return p.findById(1);
+    }
+    @GetMapping("/all")
+    public List<BasicUserDetails> getAllUsers(){
+        return p.getAllUser();
+    }
+    @GetMapping("/getUserById/{id}")
+    public User getUserBy(@PathVariable Integer id){
+        return p.getUserById(id);
     }
 }
