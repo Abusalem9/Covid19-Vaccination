@@ -23,6 +23,7 @@ public class User {
     private String mobile;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date dob;
+    private String password;
     private String gender;
     private String password;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
