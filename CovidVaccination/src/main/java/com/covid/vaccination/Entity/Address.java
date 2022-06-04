@@ -8,13 +8,14 @@ import javax.persistence.*;
 @Table(name = "address")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "address_id")
+    private Integer address_id;
     private String city;
     private String state;
     private String pinCode;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "address_id")
     private User user;
 }

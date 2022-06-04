@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Table(name = "idproof")
 public class IdProof {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
     private Integer refId;
     private String aadharNo;
-    @OneToOne(mappedBy = "refIdOfProof")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "refid")
     private User user;
 
 
