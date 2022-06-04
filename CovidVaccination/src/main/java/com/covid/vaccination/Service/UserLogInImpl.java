@@ -40,7 +40,6 @@ public class UserLogInImpl implements UserLogIn {
         if (currentUserOptional.isPresent()) {
             throw new UserAlreadyExistWithMobileNumber("User already logged in with this number");
         }
-
         if (user.getPassword().equals(userDTO.getPassword())) {
 
             String key = RandomString.make(6);

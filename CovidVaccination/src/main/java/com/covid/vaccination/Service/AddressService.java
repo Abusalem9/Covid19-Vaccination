@@ -1,8 +1,14 @@
 package com.covid.vaccination.Service;
 
 import com.covid.vaccination.Entity.Address;
+import com.covid.vaccination.Exception.AddressException;
+
+import java.util.List;
 
 public interface AddressService {
-    public Address saveAddress(Address address);
-    public Address getAddress(Integer id);
+    Address saveAddress(Address address);
+    Address getAddressById(Integer id) throws AddressException;
+    Address deleteAddressById(Integer id) throws AddressException;
+    public Address updateAddress(Address address)throws AddressException;
+    public Address updateAddressByCustom(Integer id, String pinCode)throws AddressException;
 }

@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User deleteUserById(Integer id) throws UserException {
+
         User existingUser= userRepository.findById(id).orElseThrow( () -> new UserException("User does not exist with this Id :"+id) );
         userRepository.delete(existingUser);
         return existingUser;
