@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.persistence.Id;
 import java.util.Optional;
 
-public interface SessionDAO extends JpaRepository<CurrentUserSession, Id> {
+public interface SessionRepository extends JpaRepository<CurrentUserSession, Id> {
     Optional<CurrentUserSession> findById(Integer id);
-
     Optional<CurrentUserSession> findByUuid(String uuid);
 }

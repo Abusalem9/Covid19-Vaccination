@@ -13,7 +13,8 @@ import java.util.Optional;
 @Repository
 public interface  UserRepository extends JpaRepository<User, Integer> {
         @Query("select u from User u where u.user_id=:n")
-        public User getUserById(@Param("n") Integer id);
+        User getUserById(@Param("n") Integer id);
         @Query("select u.user_id,u.firstName,u.firstName,u.mobile,u.dob,u.gender from User u")
-        public List<BasicUserDetails> getAllUser();
+        List<BasicUserDetails> getAllUser();
+        Optional<User> findByMobile(String mobileNo);
 }

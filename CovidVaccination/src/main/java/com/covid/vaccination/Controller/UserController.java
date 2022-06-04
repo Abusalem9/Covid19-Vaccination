@@ -37,9 +37,9 @@ public class UserController {
     public User deleteUserUsingId(@PathVariable("id") Integer id){
         return usi.deleteUserById(id);
     }
-// Update User By Id
-    @PutMapping("/updateUser/{id}")
-    public User updateUserByUsingId(@PathVariable("id") Integer id){
-        return usi.deleteUserById(id);
+// Update User Using Key.
+    @PutMapping("/updateUser")
+    public User updateUserByUsingId(@RequestBody User user,@RequestParam String key){
+        return usi.updateUser(user,key);
     }
 }

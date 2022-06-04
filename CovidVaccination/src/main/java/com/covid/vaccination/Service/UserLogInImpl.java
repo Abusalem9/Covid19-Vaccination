@@ -6,9 +6,8 @@ import com.covid.vaccination.Entity.UserDTO;
 import com.covid.vaccination.Exception.InvalidPasswordException;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
-import com.covid.vaccination.Repository.SessionDAO;
-import com.covid.vaccination.Repository.UserDao;
-import com.covid.vaccination.util.GetCurrentLoginUserSessionDetailsImpl;
+import com.covid.vaccination.Repository.SessionRepository;
+import com.covid.vaccination.Repository.*;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,26 +20,22 @@ import java.util.Optional;
 public class UserLogInImpl implements UserLogIn {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Autowired
-    private SessionDAO sessionDAO;
+    private SessionRepository sessionRepository;
 
     @Autowired
     private GetCurrentLoginUserSessionDetailsImpl getCurrentLoginUser;
 
     @Override
     public String logIntoAccount(UserDTO userDTO) {
-        Optional<User> opt = userDao.findByMobile(userDTO.getMobile());
+        Optional<User> opt = userRepository.findByMobile(userDTO.getMobile());
         User user = opt.get();
 
         Integer Id = user.getUser_id();
 
-        Optional<CurrentUserSession> currentUserOptional = sessionDAO.findById(Id);
-
-        if (!opt.isPresent()) {
-            throw new UserException("Please Enter Valid Mobile Number");
-        }
+        Optional<CurrentUserSession> currentUserOptional = sessionRepository.findById(Id);
 
         if (currentUserOptional.isPresent()) {
             throw new UserAlreadyExistWithMobileNumber("User already logged in with this number");
@@ -51,7 +46,7 @@ public class UserLogInImpl implements UserLogIn {
             String key = RandomString.make(6);
 
             CurrentUserSession currentUserSession = new CurrentUserSession(user.getUser_id(), key, LocalDateTime.now());
-            sessionDAO.save(currentUserSession);
+            sessionRepository.save(currentUserSession);
 
             return currentUserSession.toString();
         } else {
@@ -62,14 +57,14 @@ public class UserLogInImpl implements UserLogIn {
     @Override
     public String logOutFromAccount(String key) {
 
-        Optional<CurrentUserSession> currentUserOptional = sessionDAO.findByUuid(key);
+        Optional<CurrentUserSession> currentUserOptional = sessionRepository.findByUuid(key);
 
         if (!currentUserOptional.isPresent()) {
             throw new UserException("User is not logged in with this number");
         }
 
         CurrentUserSession currentUserSession = getCurrentLoginUser.getCurrentUserSession(key);
-        sessionDAO.delete(currentUserSession);
+        sessionRepository.delete(currentUserSession);
 
         return "Logged Out...";
     }
