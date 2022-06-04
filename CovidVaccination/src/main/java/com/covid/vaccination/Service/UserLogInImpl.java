@@ -34,7 +34,7 @@ public class UserLogInImpl implements UserLogIn {
         Optional<User> opt = userDao.findByMobile(userDTO.getMobileNo());
         User user = opt.get();
 
-        Integer Id = user.getId();
+        Integer Id = user.getUser_id();
 
         Optional<CurrentUserSession> currentUserOptional = sessionDAO.findById(Id);
 
@@ -50,7 +50,7 @@ public class UserLogInImpl implements UserLogIn {
 
             String key = RandomString.make(6);
 
-            CurrentUserSession currentUserSession = new CurrentUserSession(user.getId(), key, LocalDateTime.now());
+            CurrentUserSession currentUserSession = new CurrentUserSession(user.getUser_id(), key, LocalDateTime.now());
             sessionDAO.save(currentUserSession);
 
             return currentUserSession.toString();
