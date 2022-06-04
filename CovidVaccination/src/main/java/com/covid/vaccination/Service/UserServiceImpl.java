@@ -4,6 +4,7 @@ import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +19,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Query("select u.firstName from User as u")
     public User getUserById(Integer id) throws UserException {
         return p.findById(id).orElseThrow(() -> new UserException("User does not exist with Roll :"+id));
     }
 
     @Override
+
     public List<User> getAllUsers() throws UserException {
         return null;
     }
