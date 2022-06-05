@@ -18,7 +18,7 @@ public class Dose {
     private Integer user_id;
     private boolean dose1;
 
-    //    User -> Details-> Dose-> Doctor Approvel -> Approved -> Doctor DB save ;
+    //    User -> Details-> Dose-> Doctor Approval -> Approved -> Doctor DB save ;
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer doseFirstId;
     @Value("${my.date}")

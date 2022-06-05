@@ -16,7 +16,6 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
     private Integer user_id;
     private String firstName;
     private String lastName;
