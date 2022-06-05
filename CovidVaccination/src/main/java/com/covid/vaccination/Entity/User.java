@@ -1,12 +1,13 @@
 package com.covid.vaccination.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+
 
 @Data
 @ToString
@@ -25,14 +26,14 @@ public class User {
     private Date dob;
     private String password;
     private String gender;
-    private String password;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @JsonIgnore
+    private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Address address;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @JsonIgnore
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private IdProof idProof;
 
 }
