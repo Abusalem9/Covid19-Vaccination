@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "Cadres")
 public class centerAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +15,7 @@ public class centerAddress {
     private String state;
     private String pinCode;
 
-    @OneToOne(mappedBy = "Cadres")
+    @OneToOne(mappedBy = "centerAddress")
     @JsonBackReference
     private Center center;
 }

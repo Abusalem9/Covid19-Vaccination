@@ -15,9 +15,9 @@ public class UserController {
 
 //    Create User
     @PostMapping("/createUser")
-    public User createUser(@RequestBody User user){
+    public String createUser(@RequestBody User user){
         usi.saveUser(user);
-        return user;
+        return "User Has Been Added Into DataBase.";
     }
 
 //    get User Using User_id

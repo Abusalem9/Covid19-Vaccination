@@ -35,4 +35,8 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private IdProof idProof;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Center center;
 }
