@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface  UserRepository extends JpaRepository<User, Integer> {
+public interface   UserRepository extends JpaRepository<User, Integer> {
         @Query("select u from User u where u.user_id=:n")
         User getUserById(@Param("n") Integer id);
         @Query("select u.user_id,u.firstName,u.firstName,u.mobile,u.dob,u.gender from User u")
