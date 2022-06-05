@@ -3,11 +3,12 @@ package com.covid.vaccination.Service;
 import com.covid.vaccination.Entity.CurrentUserSession;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Entity.UserDTO;
+import com.covid.vaccination.Exception.InvalidMobileException;
 import com.covid.vaccination.Exception.InvalidPasswordException;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.SessionRepository;
-import com.covid.vaccination.Repository.*;
+import com.covid.vaccination.Repository.UserRepository;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,17 +31,30 @@ public class UserLogInImpl implements UserLogIn {
 
     @Override
     public String logIntoAccount(UserDTO userDTO) {
+
         Optional<User> opt = userRepository.findByMobile(userDTO.getMobile());
+
+
+        if (userDTO.getMobile().length() != 10 || !opt.isPresent()) {
+            throw new InvalidMobileException("Please Enter Valid Mobile No");
+        }
+
         User user = opt.get();
 
         Integer Id = user.getUser_id();
 
+
         Optional<CurrentUserSession> currentUserOptional = sessionRepository.findById(Id);
 
+
+        if (!user.getPassword().equals(userDTO.getPassword())) {
+
+            throw new InvalidPasswordException("Please Enter Valid Password");
+        }
         if (currentUserOptional.isPresent()) {
             throw new UserAlreadyExistWithMobileNumber("User already logged in with this number");
-        }
-        if (user.getPassword().equals(userDTO.getPassword())) {
+        } else {
+
 
             String key = RandomString.make(6);
 
@@ -48,9 +62,9 @@ public class UserLogInImpl implements UserLogIn {
             sessionRepository.save(currentUserSession);
 
             return currentUserSession.toString();
-        } else {
-            throw new InvalidPasswordException("Please Enter Valid Password");
+
         }
+
     }
 
     @Override

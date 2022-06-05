@@ -13,23 +13,32 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalException {
 
-    @ExceptionHandler({UserException.class, InvalidPasswordException.class, UserAlreadyExistWithMobileNumber.class, AddressException.class})
 
+    @ExceptionHandler({InvalidMobileException.class})
+    public ResponseEntity<MyErrorDetails> handleInvalidMobileException(InvalidMobileException exp, WebRequest req) {
+        MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({UserException.class})
     public ResponseEntity<MyErrorDetails> handleUserException(UserException exp, WebRequest req) {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler({InvalidPasswordException.class})
     public ResponseEntity<MyErrorDetails> handleInvalidPasswordException(InvalidPasswordException exp, WebRequest req) {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
-        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(err, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler({UserAlreadyExistWithMobileNumber.class})
     public ResponseEntity<MyErrorDetails> handleUserAlreadyExistWithMobileNumber(UserAlreadyExistWithMobileNumber exp, WebRequest req) {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
-        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(err, HttpStatus.ALREADY_REPORTED);
     }
 
+    @ExceptionHandler({AddressException.class})
     public ResponseEntity<MyErrorDetails> handleAddressException(AddressException exp, WebRequest req) {
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), exp.getMessage(), req.getDescription(false));
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
@@ -41,7 +50,7 @@ public class GlobalException {
 
         MyErrorDetails err = new MyErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
 
-        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(err, HttpStatus.METHOD_NOT_ALLOWED);
 
     }
 
