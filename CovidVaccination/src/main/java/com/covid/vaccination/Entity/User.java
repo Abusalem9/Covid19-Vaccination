@@ -25,6 +25,7 @@ public class User {
     private Date dob;
     private String password;
     private String gender;
+    private String password;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     @JsonIgnore
