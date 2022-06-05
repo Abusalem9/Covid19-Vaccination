@@ -35,18 +35,4 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private IdProof idProof;
-
-    @OneToOne(orphanRemoval = true)
-    @JoinTable(name = "users_center_address",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "center_address_address_id"))
-    private centerAddress centerAddress;
-
-    public com.covid.vaccination.Entity.centerAddress getCenterAddress() {
-        return centerAddress;
-    }
-
-    public void setCenterAddress(com.covid.vaccination.Entity.centerAddress centerAddress) {
-        this.centerAddress = centerAddress;
-    }
 }
