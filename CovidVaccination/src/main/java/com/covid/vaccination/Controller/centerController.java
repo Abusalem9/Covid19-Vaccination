@@ -3,11 +3,9 @@ package com.covid.vaccination.Controller;
 import com.covid.vaccination.Entity.Center;
 import com.covid.vaccination.Service.centerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
 public class centerController {
 
     @Autowired
@@ -21,7 +19,7 @@ public class centerController {
         return center;
     }
 
-    @GetMapping("/centerAddress/{id}")
+    @GetMapping("/getCenter/{id}")
     public Center getCenterAddressById(@PathVariable("id") Integer id) {
 
         return cImpl.getCenterById(id);

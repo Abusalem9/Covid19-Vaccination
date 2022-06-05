@@ -4,7 +4,9 @@ import com.covid.vaccination.Entity.Center;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.CenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class centerServiceImpl implements centerService {
 
     @Autowired

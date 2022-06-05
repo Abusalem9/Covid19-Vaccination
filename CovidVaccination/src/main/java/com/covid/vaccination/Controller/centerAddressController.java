@@ -1,7 +1,7 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.centerAddress;
-import com.covid.vaccination.Service.centerAdressServiceImpl;
+import com.covid.vaccination.Service.centerAddressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class centerAddressController {
 
     @Autowired
-    public centerAdressServiceImpl usi;
+    public centerAddressServiceImpl usi;
 
     @PostMapping("/createCenterAddress")
     public centerAddress createCenterAddress(@RequestBody centerAddress centerAddress) {
