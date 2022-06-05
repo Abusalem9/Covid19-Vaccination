@@ -26,6 +26,5 @@ public class Dose {
     private Integer doseSecondId;
     @Value("${my.date}")
     private LocalDateTime dose2Date=LocalDateTime.now();
-    @Enumerated(EnumType.ORDINAL)
-    private Slot slot;
+
 }
