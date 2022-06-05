@@ -32,12 +32,7 @@ public class DoseController {
     public List<Dose> getAllDoseFromDB(){
         return usi.getAllDoses();
     }
-    // Delete Dose By Id
-    @DeleteMapping("/deleteDose/{id}")
-    public Dose deleteDoseUsingId(@PathVariable("id") Integer id){
-        return usi.deleteDoseById(id);
-    }
-    // Update Dose Using Key.
+
     @PutMapping("/updateDose")
     public Dose updateDoseByUsingId(@RequestBody Dose user,@RequestParam String key){
         return usi.updateDose(user,key);

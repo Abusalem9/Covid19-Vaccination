@@ -19,6 +19,7 @@ public class DoseServiceImpl implements DoseService{
     private GetCurrentLoginUserSessionDetailsImpl getCurrentLoginUser;
     @Override
     public void saveDose(Dose user) {
+        doseRepository.findById(user.getUser_id()).isPresent(() -> new DoseException("Dose does not exist with Roll :" + user.getUser_id()));
         doseRepository.save(user);
     }
 
