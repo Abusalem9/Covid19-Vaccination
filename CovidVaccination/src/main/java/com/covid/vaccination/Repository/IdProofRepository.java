@@ -9,6 +9,4 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public interface IdProofRepository extends JpaRepository<IdProof,Integer> {
-    public IdProof  getIdProofByAadharNo(String aadharNo);
-    public String getIdProofByRefId(Integer refId);
 }

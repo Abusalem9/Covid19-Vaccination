@@ -3,7 +3,6 @@ package com.covid.vaccination.Service;
 import com.covid.vaccination.Entity.Address;
 import com.covid.vaccination.Exception.AddressException;
 
-import java.util.List;
 
 public interface AddressService {
     Address saveAddress(Address address);
