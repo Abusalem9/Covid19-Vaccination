@@ -30,7 +30,6 @@ public class User {
     @JsonManagedReference
     private Address address;
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
     private IdProof idProof;
 
 }
