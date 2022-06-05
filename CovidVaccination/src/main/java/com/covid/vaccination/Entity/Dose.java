@@ -11,7 +11,9 @@ public class Dose {
     @Id
     private Long doseRefId;
     private boolean dose1;
+    private Integer doseFirstId;
     private Date dose1Date;
     private boolean dose2;
+    private Integer doseSecondId;
     private Date dose2Date;
 }

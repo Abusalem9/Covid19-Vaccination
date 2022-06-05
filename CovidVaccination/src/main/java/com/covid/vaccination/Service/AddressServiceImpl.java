@@ -6,9 +6,10 @@ import com.covid.vaccination.Exception.AddressException;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
+@Repository
 public class AddressServiceImpl implements AddressService{
     @Autowired
     public AddressRepository addressRepository;
