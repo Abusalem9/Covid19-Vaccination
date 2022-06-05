@@ -5,7 +5,9 @@ import com.covid.vaccination.Exception.AddressException;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.CenterAddresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class centerAdressServiceImpl implements centerAddressService {
 
     @Autowired
