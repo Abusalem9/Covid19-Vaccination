@@ -1,0 +1,225 @@
+user:-
+
+{
+  "address": {
+    "address_id": 0,
+    "city": "string",
+    "pinCode": "string",
+    "state": "string"
+  },
+  "age": 0,
+  "centerAddress": {
+    "address_id": 0,
+    "center": {
+      "centerID": 0,
+      "centerName": "string",
+      "count": 0,
+      "slot": "SLOT11000TO1030"
+    },
+    "city": "string",
+    "pinCode": "string",
+    "state": "string"
+  },
+  "dob": "dd-MM-yyyy",
+  "email": "string",
+  "firstName": "string",
+  "gender": "string",
+  "idProof": {
+    "aadharNo": "string",
+    "panCardNo": "string",
+    "refId": 0
+  },
+  "lastName": "string",
+  "mobile": "string",
+  "password": "string",
+  "user_id": 0
+}
+
+-----------------------------------------------
+
+getUserById : 3
+Response body:
+{
+  "user_id": 3,
+  "firstName": "Abusalem",
+  "lastName": "M",
+  "age": 19,
+  "mobile": "86689926820",
+  "dob": "09-07-2002",
+  "password": "password@12",
+  "gender": "male",
+  "email": "abu@gmail.com",
+  "address": {
+    "address_id": 1,
+    "city": "Sangli",
+    "state": "MH",
+    "pinCode": "416404"
+  },
+  "idProof": {
+    "refId": 2,
+    "aadharNo": "440940605150",
+    "panCardNo": null
+  }
+}
+
+Response Header:
+connection: keep-alive
+content-type: application/json
+date: Sun, 05 Jun 2022 19:34:22 GMT
+keep-alive: timeout=60
+transfer-encoding: chunked
+
+---------------------------------------------------
+
+getUserById : 1
+
+Response body:
+{
+  "timestamp": "2022-06-06T01:06:20.1132752",
+  "message": "User does not exist with Roll :1",
+  "details": "uri=/User/1"
+}
+
+Response Header:
+ connection: keep-alive
+ content-type: application/json
+ date: Sun, 05 Jun 2022 19:36:20 GMT
+ keep-alive: timeout=60
+ transfer-encoding: chunked
+
+
+
+------------------------------------------------------------
+
+getAllUserFromDB
+
+Response body:
+
+[
+  {
+    "user_id": 3,
+    "firstName": "Abusalem",
+    "lastName": "M",
+    "age": 19,
+    "mobile": "86689926820",
+    "dob": "09-07-2002",
+    "password": "password@12",
+    "gender": "male",
+    "email": "abu@gmail.com",
+    "address": {
+      "address_id": 1,
+      "city": "Sangli",
+      "state": "MH",
+      "pinCode": "416404"
+    },
+    "idProof": {
+      "refId": 2,
+      "aadharNo": "440940605150",
+      "panCardNo": null
+    }
+  },
+  {
+    "user_id": 6,
+    "firstName": "Abusalem",
+    "lastName": "M",
+    "age": 19,
+    "mobile": "86689926820",
+    "dob": "09-07-2002",
+    "password": "password@12",
+    "gender": "male",
+    "email": "abu@gmail.com",
+    "address": {
+      "address_id": 4,
+      "city": "Sangli",
+      "state": "MH",
+      "pinCode": "416404"
+    },
+    "idProof": {
+      "refId": 5,
+      "aadharNo": "440940605150",
+      "panCardNo": null
+    }
+  }
+]
+
+Response headers:
+ connection: keep-alive
+ content-type: application/json
+ date: Sun, 05 Jun 2022 19:39:36 GMT
+ keep-alive: timeout=60
+ transfer-encoding: chunked
+
+-------------------------------------------------------
+
+updateUserByUsingId
+key = 3
+
+Response body
+Download
+{
+  "timestamp": "2022-06-06T01:13:57.9666292",
+  "message": "Unauthorized",
+  "details": "uri=/updateUser"
+}
+Response headers
+ connection: keep-alive
+ content-type: application/json
+ date: Sun, 05 Jun 2022 19:43:57 GMT
+ keep-alive: timeout=60
+ transfer-encoding: chunked
+
+
+-------------------------------------------------
+
+deleteUserUsingId id=1
+
+Response body
+Download
+{
+  "timestamp": "2022-06-06T01:15:21.7043345",
+  "message": "User does not exist with this Id :1",
+  "details": "uri=/deleteUser/1"
+}
+Response headers
+ connection: keep-alive
+ content-type: application/json
+ date: Sun, 05 Jun 2022 19:45:21 GMT
+ keep-alive: timeout=60
+ transfer-encoding: chunked
+
+----------------------------------------------------
+
+deleteUserUsingId id=6
+
+
+Response body
+Download
+{
+  "user_id": 6,
+  "firstName": "Abusalem",
+  "lastName": "M",
+  "age": 19,
+  "mobile": "86689926820",
+  "dob": "09-07-2002",
+  "password": "password@12",
+  "gender": "male",
+  "email": "abu@gmail.com",
+  "address": {
+    "address_id": 4,
+    "city": "Sangli",
+    "state": "MH",
+    "pinCode": "416404"
+  },
+  "idProof": {
+    "refId": 5,
+    "aadharNo": "440940605150",
+    "panCardNo": null
+  }
+}
+Response headers
+ connection: keep-alive
+ content-type: application/json
+ date: Sun, 05 Jun 2022 19:46:18 GMT
+ keep-alive: timeout=60
+ transfer-encoding: chunked
+
