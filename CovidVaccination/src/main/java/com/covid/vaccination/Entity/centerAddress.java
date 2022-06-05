@@ -5,22 +5,17 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-public class Center {
-
+@Data
+public class centerAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer centerID;
-    private String centerName;
-    private Integer count;
-    @Enumerated(EnumType.ORDINAL)
-    private Slot slot;
-
+    private Integer address_id;
+    private String city;
+    private String state;
+    private String pinCode;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
-    private centerAddress Cadres;
-
-
+    private Center center;
 }
