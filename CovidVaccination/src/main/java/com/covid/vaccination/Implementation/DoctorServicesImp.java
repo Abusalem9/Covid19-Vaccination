@@ -5,7 +5,7 @@ import com.covid.vaccination.DTO.DoctorDTO;
 import com.covid.vaccination.Exception.DoctorException;
 import com.covid.vaccination.Exception.InvalidMobileException;
 import com.covid.vaccination.Repository.DoctorRepository;
-import com.covid.vaccination.Repository.DoctorSessionRepo;
+import com.covid.vaccination.Repository.DoctorSessionRepository;
 import com.covid.vaccination.Service.DoctorServices;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class DoctorServicesImp implements DoctorServices {
 
     @Autowired
     private DoctorRepository doctorRepository;
-    private DoctorSessionRepo doctorSessionRepo;
+    private DoctorSessionRepository doctorSessionRepo;
 
     @Override
     public void addDoctor(Doctor doctor) {
