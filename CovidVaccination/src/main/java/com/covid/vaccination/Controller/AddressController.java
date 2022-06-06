@@ -24,9 +24,7 @@ public class AddressController {
         return addressService.getAddressById(id);
 
     }
-//    Get All Addresss
 
-    // Delete Address By Id
     @DeleteMapping("/deleteAddress/{id}")
     public Address deleteAddressUsingId(@Valid @PathVariable("id") Integer id){
         return addressService.deleteAddressById(id);

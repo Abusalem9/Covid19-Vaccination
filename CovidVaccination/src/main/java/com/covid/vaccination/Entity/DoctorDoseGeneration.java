@@ -21,7 +21,4 @@ public class DoctorDoseGeneration {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Dose2 dose2;
-
-
-//    User -> Addres -> idproof -> dose -> Doctor ->
 }
