@@ -13,7 +13,7 @@ import java.util.Date;
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer dUserId;
+    private Integer doctorId;
     private String firstName;
     private String lastName;
     private String mobile;

@@ -10,6 +10,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     @Override
       Optional<Doctor> findById(Integer integer);
 
+    Optional<Doctor> findByMobile(String mobileNo);
+
 
     //    @Query("select u.user_id,u.firstName,u.firstName,u.mobile,u.dob,u.gender from User u")
 //    List<BasicUserDetails> getAllUser();

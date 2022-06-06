@@ -1,6 +1,6 @@
 package com.covid.vaccination.Service;
 
-import com.covid.vaccination.Entity.UserDTO;
+import com.covid.vaccination.DTO.UserDTO;
 
 public interface UserLogIn {
 

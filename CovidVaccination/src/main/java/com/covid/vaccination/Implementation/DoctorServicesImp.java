@@ -1,18 +1,26 @@
-package com.covid.vaccination.Service;
-
+package com.covid.vaccination.Implementation;
+import com.covid.vaccination.Entity.CurrentDoctorSession;
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.DTO.DoctorDTO;
+import com.covid.vaccination.Exception.DoctorException;
+import com.covid.vaccination.Exception.InvalidMobileException;
 import com.covid.vaccination.Repository.DoctorRepository;
+import com.covid.vaccination.Repository.DoctorSessionRepo;
+import com.covid.vaccination.Service.DoctorServices;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 @Service
-public class DoctorServicesImp implements DoctorServices{
+public class DoctorServicesImp implements DoctorServices {
 
     @Autowired
-    public DoctorRepository doctorRepository;
-
+    private DoctorRepository doctorRepository;
+    private DoctorSessionRepo doctorSessionRepo;
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -34,13 +42,51 @@ public class DoctorServicesImp implements DoctorServices{
         return null;
     }
 
+    // Login and Logout Functionalities.. 
+    // (To take charge of a particular center)
     @Override
-    public String logIntoAccount(DoctorDTO DTO) {
-        return null;
+    public String loginAccount(DoctorDTO dto) {
+        
+        Optional<Doctor> doctorOpt= doctorRepository.findByMobile(dto.getMobile());
+
+        if (dto.getMobile().length() != 10 || !doctorOpt.isPresent()) {
+            throw new InvalidMobileException("Please Enter Valid Mobile No");
+        }
+        
+        Doctor currDoctor = doctorOpt.get();
+        Integer did= currDoctor.getDoctorId();
+
+        if(!currDoctor.getPassword().equals(dto.getPassword())){
+            throw new DoctorException("Please enter a valid password");
+        }
+        
+        Optional<CurrentDoctorSession> currentDoctorSession = doctorSessionRepo.findById(did);
+        
+        if(currentDoctorSession.isPresent()){
+            throw new DoctorException("You are already working to a center..");
+        }
+
+        String key = RandomString.make(7);
+
+        CurrentDoctorSession session = new CurrentDoctorSession(currDoctor.getDoctorId(),key, LocalDateTime.now());
+        
+        doctorSessionRepo.save(session);
+
+        return doctorSessionRepo.toString();
+
     }
 
     @Override
-    public String logOutFromAccount(String key) {
-        return null;
+    public String logoutAccount(String key) {
+
+        Optional <CurrentDoctorSession> session = doctorSessionRepo.findByUuid(key);
+
+        if (!session.isPresent()){
+            throw new DoctorException("Invalid key OR Doctor is present in the center");
+        }
+        doctorSessionRepo.delete(session.get());
+
+        return "Doctor is leaving from the center..";
     }
+    
 }
