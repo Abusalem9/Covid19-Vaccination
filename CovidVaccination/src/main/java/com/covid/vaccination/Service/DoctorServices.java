@@ -1,8 +1,7 @@
 package com.covid.vaccination.Service;
 
 import com.covid.vaccination.Entity.Doctor;
-import com.covid.vaccination.Entity.DoctorDTO;
-import com.covid.vaccination.Entity.UserDTO;
+import com.covid.vaccination.DTO.DoctorDTO;
 
 import java.util.List;
 
@@ -18,9 +17,9 @@ public interface DoctorServices {
 
 
 // Doctor  Login and logout services
-    String logIntoAccount(DoctorDTO DTO);
+    String loginAccount(DoctorDTO DTO);
 
-    String logOutFromAccount(String key);
+    String logoutAccount(String key);
 
 
 
