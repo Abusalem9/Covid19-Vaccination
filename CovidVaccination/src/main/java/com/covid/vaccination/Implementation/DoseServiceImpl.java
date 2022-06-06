@@ -1,22 +1,21 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
-import com.covid.vaccination.Entity.Dose;
 import com.covid.vaccination.Entity.Dose;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.DoseException;
-import com.covid.vaccination.Exception.DoseException;
 import com.covid.vaccination.Repository.DoseRepository;
+import com.covid.vaccination.Service.DoseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class DoseServiceImpl implements DoseService{
+public class DoseServiceImpl implements DoseService {
     @Autowired
     public DoseRepository doseRepository;
     @Autowired
-    private GetCurrentLoginUserSessionDetailsImpl getCurrentLoginUser;
+    private GetCurrentUserLoginSessionDetailsImpl getCurrentLoginUser;
     @Override
     public void saveDose(Dose user) {
 //        doseRepository.findById(user.getUser_id()).isPresent(() -> new DoseException("Dose does not exist with Roll :" + user.getUser_id()));

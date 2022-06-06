@@ -1,4 +1,4 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.CurrentUserSession;
 import com.covid.vaccination.Entity.User;
@@ -7,8 +7,9 @@ import com.covid.vaccination.Exception.InvalidMobileException;
 import com.covid.vaccination.Exception.InvalidPasswordException;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
-import com.covid.vaccination.Repository.SessionRepository;
+import com.covid.vaccination.Repository.UserSessionRepository;
 import com.covid.vaccination.Repository.UserRepository;
+import com.covid.vaccination.Service.UserLogIn;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,10 @@ public class UserLogInImpl implements UserLogIn {
     private UserRepository userRepository;
 
     @Autowired
-    private SessionRepository sessionRepository;
+    private UserSessionRepository userSessionRepository;
 
     @Autowired
-    private GetCurrentLoginUserSessionDetailsImpl getCurrentLoginUser;
+    private GetCurrentUserLoginSessionDetailsImpl getCurrentLoginUser;
 
     @Override
     public String logIntoAccount(UserDTO userDTO) {
@@ -44,7 +45,7 @@ public class UserLogInImpl implements UserLogIn {
        Integer Id = user.getUser_id();
 
 
-        Optional<CurrentUserSession> currentUserOptional = sessionRepository.findById(Id);
+        Optional<CurrentUserSession> currentUserOptional = userSessionRepository.findById(Id);
 
 
         if (!user.getPassword().equals(userDTO.getPassword())) {
@@ -59,7 +60,7 @@ public class UserLogInImpl implements UserLogIn {
             String key = RandomString.make(6);
 
             CurrentUserSession currentUserSession = new CurrentUserSession(user.getUser_id(), key, LocalDateTime.now());
-            sessionRepository.save(currentUserSession);
+            userSessionRepository.save(currentUserSession);
 
             return currentUserSession.toString();
 
@@ -70,14 +71,14 @@ public class UserLogInImpl implements UserLogIn {
     @Override
     public String logOutFromAccount(String key) {
 
-        Optional<CurrentUserSession> currentUserOptional = sessionRepository.findByUuid(key);
+        Optional<CurrentUserSession> currentUserOptional = userSessionRepository.findByUuid(key);
 
         if (!currentUserOptional.isPresent()) {
             throw new UserException("User is not logged in with this number");
         }
 
         CurrentUserSession currentUserSession = getCurrentLoginUser.getCurrentUserSession(key);
-        sessionRepository.delete(currentUserSession);
+        userSessionRepository.delete(currentUserSession);
 
         return "Logged Out...";
     }

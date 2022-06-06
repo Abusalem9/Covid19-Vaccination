@@ -1,7 +1,7 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.User;
-import com.covid.vaccination.Service.UserServiceImpl;
+import com.covid.vaccination.Implementation.UserServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

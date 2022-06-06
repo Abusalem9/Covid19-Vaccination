@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Id;
 import java.util.Optional;
 @Repository
-public interface SessionRepository extends JpaRepository<CurrentUserSession, Id> {
+public interface UserSessionRepository extends JpaRepository<CurrentUserSession, Id> {
     Optional<CurrentUserSession> findById(Integer id);
     Optional<CurrentUserSession> findByUuid(String uuid);
 }
