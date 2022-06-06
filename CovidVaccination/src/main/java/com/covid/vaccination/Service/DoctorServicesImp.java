@@ -20,7 +20,7 @@ public class DoctorServicesImp implements DoctorServices{
     @Override
     public Doctor getDoctor(Integer did) throws DoctorException{
       Doctor doctor= doctorRepository.findById(did).orElseThrow( ()-> {
-         throw  new DoctorException("Can't found doctor with this ID");
+          throw  new DoctorException("Can't found doctor with this ID");
       });
       return doctor;
     }
