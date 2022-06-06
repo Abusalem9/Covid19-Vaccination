@@ -4,9 +4,10 @@ import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Exception.DoctorException;
 import com.covid.vaccination.Repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DoctorServicesImp implements DoctorServices{
 
     @Autowired
