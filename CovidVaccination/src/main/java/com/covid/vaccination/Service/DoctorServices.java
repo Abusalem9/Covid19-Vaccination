@@ -1,17 +1,19 @@
 package com.covid.vaccination.Service;
 
-import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.DTO.DoctorDTO;
+import com.covid.vaccination.Entity.Doctor;
+import com.covid.vaccination.Exception.UserException;
 
 import java.util.List;
 
+
 public interface DoctorServices {
 
-    void addDoctor(Doctor doctor);
+    Doctor addDoctor(Doctor doctor);
 
      Doctor getDoctor(Integer did);
 
-    void deleteDoctorById(Integer did);
+    Doctor deleteDoctorById(Integer did);
 
     List<Doctor> getAllDoctors();
 
@@ -21,7 +23,7 @@ public interface DoctorServices {
 
     String logoutAccount(String key);
 
-
+    Doctor updateDoctor(Doctor doctor) throws UserException;
 
     // new functionalities
 

@@ -1,9 +1,13 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.Address;
+import com.covid.vaccination.Entity.Center;
+import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Implementation.AddressServiceImpl;
+import com.covid.vaccination.Implementation.DoctorServicesImp;
 import com.covid.vaccination.Implementation.UserServiceImpl;
+import com.covid.vaccination.Implementation.centerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +18,12 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
+    public centerServiceImpl cImpl;
+    @Autowired
     public UserServiceImpl usi;
+
+    @Autowired
+    public DoctorServicesImp doctorServicesImp;
     @Autowired
     public AddressServiceImpl addressService;
 
@@ -48,7 +57,7 @@ public class AdminController {
         return usi.updateUser(user,key);
     }
 
-    @PostMapping("/Admin/createAddress")
+    @PostMapping("/Admin/Address/createAddress")
     public Address createAddress(@Valid @RequestBody Address address){
         addressService.saveAddress(address);
         return address;
@@ -64,13 +73,70 @@ public class AdminController {
 //    Get All Addresss
 
     // Delete Address By Id
-    @DeleteMapping("/Admin/deleteAddress/{id}")
-    public Address deleteAddressUsingId(@Valid @PathVariable("id") Integer id){
+    @DeleteMapping("/Admin/Address/deleteAddress/{id}")
+    public Address deleteAddressUsingId(@Valid @PathVariable("id") Integer id) {
         return addressService.deleteAddressById(id);
     }
+
     // Update Address Using KeyaddressService.
-    @PutMapping("/Admin/updateAddress")
-    public Address updateAddressByUsingId(@Valid @RequestBody Address address, @RequestParam String key){
+    @PutMapping("/Admin/Address/updateAddress")
+    public Address updateAddressByUsingId(@Valid @RequestBody Address address, @RequestParam String key) {
         return addressService.updateAddressByCustom(address.getAddress_id(), key);
+    }
+
+    @GetMapping("/Admin/Doctors/getAllDoctors")
+    public List<Doctor> getAllDoctorFromDB() {
+        return doctorServicesImp.getAllDoctors();
+    }
+
+    @GetMapping("/Admin/Doctor/{dUserId}")
+    public Doctor getDoctorFromDB(@PathVariable("dUserId") Integer dUserId) {
+        return doctorServicesImp.getDoctor(dUserId);
+    }
+
+    @GetMapping("/Admin/getCenter/{id}")
+    public Center getCenterAddressById(@PathVariable("id") Integer id) {
+
+        return cImpl.getCenterById(id);
+    }
+
+    @GetMapping("/Admin/getAllCenter/")
+    public List<Center> getCenterAddressById() {
+
+        return cImpl.getAllCenter();
+    }
+
+    @PutMapping("/Admin/updateDoctor")
+    public Doctor updateDoctor(@RequestBody Doctor doctor) {
+        return doctorServicesImp.updateDoctor(doctor);
+    }
+
+    @PutMapping("/Admin/updateCenter")
+    public Center updateCenter(@RequestBody Center center) {
+        cImpl.saveCenter(center);
+        return center;
+    }
+
+    @PostMapping("/Admin/createCenter")
+    public Center createCenterAddress(@RequestBody Center center) {
+        cImpl.saveCenter(center);
+        return center;
+    }
+
+    @DeleteMapping("/Admin/deleteCenter/{id}")
+    public Center deleteCenterUsingId(@PathVariable("id") Integer id) {
+
+        return cImpl.deleteCenterId(id);
+    }
+
+    @PostMapping("/Admin/createDoctor")
+    public String createDoctor(@RequestBody Doctor doctor) {
+        doctorServicesImp.addDoctor(doctor);
+        return "Doctor Has Been Added Into DataBase.";
+    }
+
+    @DeleteMapping("/Admin/deleteDoctor/{id}")
+    public Doctor deleteDoctorUsingId(@PathVariable("id") Integer id) {
+        return doctorServicesImp.deleteDoctorById(id);
     }
 }

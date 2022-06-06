@@ -2,7 +2,7 @@ package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.CurrentUserSession;
 import com.covid.vaccination.Entity.User;
-import com.covid.vaccination.Entity.UserDTO;
+import com.covid.vaccination.DTO.UserDTO;
 import com.covid.vaccination.Exception.InvalidMobileException;
 import com.covid.vaccination.Exception.InvalidPasswordException;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
