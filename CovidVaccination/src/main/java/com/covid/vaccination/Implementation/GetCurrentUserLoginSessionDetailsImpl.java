@@ -5,7 +5,11 @@ import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.UserSessionRepository;
 import com.covid.vaccination.Repository.UserRepository;
+<<<<<<<< HEAD:CovidVaccination/src/main/java/com/covid/vaccination/Implementation/GetCurrentUserLoginSessionDetailsImpl.java
 import com.covid.vaccination.Service.GetCurrentUserLoginSessionDetailsInterface;
+========
+import com.covid.vaccination.Service.GetCurrentLoginUserSessionDetailsInterface;
+>>>>>>>> origin/main:CovidVaccination/src/main/java/com/covid/vaccination/Implementation/GetCurrentLoginUserSessionDetailsImpl.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
