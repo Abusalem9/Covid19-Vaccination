@@ -2,6 +2,7 @@ package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Implementation.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,11 +10,10 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    public final UserServiceImpl usi;
+    @Autowired
+    public  UserServiceImpl usi;
 
-    public UserController(UserServiceImpl usi) {
-        this.usi = usi;
-    }
+
 
 
 //    Create User
