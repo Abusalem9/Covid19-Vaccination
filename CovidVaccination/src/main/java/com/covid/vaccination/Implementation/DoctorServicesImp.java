@@ -1,6 +1,7 @@
 package com.covid.vaccination.Service;
 
 import com.covid.vaccination.Entity.Doctor;
+import com.covid.vaccination.Entity.DoctorDTO;
 import com.covid.vaccination.Exception.DoctorException;
 import com.covid.vaccination.Repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +14,34 @@ public class DoctorServicesImp implements DoctorServices{
     @Autowired
     public DoctorRepository doctorRepository;
 
+
     @Override
     public void addDoctor(Doctor doctor) {
-        doctorRepository.save(doctor);
+
     }
 
     @Override
-    public Doctor getDoctor(Integer did) throws DoctorException{
-//      Doctor doctor= doctorRepository.findById(did).orElseThrow( ()-> {
-//          throw  new DoctorException("Can't found doctor with this ID");
-//      });
-      return null;
+    public Doctor getDoctor(Integer did) {
+        return null;
     }
 
     @Override
     public void deleteDoctorById(Integer did) {
-        doctorRepository.deleteById(did);
+
     }
 
     @Override
-    public List<Doctor> getAllDoctors() throws DoctorException{
+    public List<Doctor> getAllDoctors() {
+        return null;
+    }
 
-        List<Doctor> doctors= doctorRepository.findAll();
-        if(doctors.size()<=0){
-            throw new DoctorException("There is no any doctor present here.");
-        }
-        return doctors;
+    @Override
+    public String logIntoAccount(DoctorDTO DTO) {
+        return null;
+    }
+
+    @Override
+    public String logOutFromAccount(String key) {
+        return null;
     }
 }

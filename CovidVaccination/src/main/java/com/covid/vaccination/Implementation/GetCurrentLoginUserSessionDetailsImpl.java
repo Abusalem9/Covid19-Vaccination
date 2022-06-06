@@ -3,25 +3,25 @@ package com.covid.vaccination.Implementation;
 import com.covid.vaccination.Entity.CurrentUserSession;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.UserException;
-import com.covid.vaccination.Repository.UserSessionRepository;
+import com.covid.vaccination.Repository.SessionRepository;
 import com.covid.vaccination.Repository.UserRepository;
-import com.covid.vaccination.Service.GetCurrentUserLoginSessionDetailsInterface;
+import com.covid.vaccination.Service.GetCurrentLoginUserSessionDetailsInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class GetCurrentUserLoginSessionDetailsImpl implements GetCurrentUserLoginSessionDetailsInterface {
+public class GetCurrentLoginUserSessionDetailsImpl implements GetCurrentLoginUserSessionDetailsInterface {
     @Autowired
-    private UserSessionRepository userSessionRepository;
+    private SessionRepository sessionRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public CurrentUserSession getCurrentUserSession(String key) {
-        Optional<CurrentUserSession> optional = userSessionRepository.findByUuid(key);
+        Optional<CurrentUserSession> optional = sessionRepository.findByUuid(key);
         if (!optional.isPresent()) {
             throw new UserException("Unauthorized");
         }
@@ -30,7 +30,7 @@ public class GetCurrentUserLoginSessionDetailsImpl implements GetCurrentUserLogi
 
     @Override
     public Integer getCurrentUserSessionId(String key) {
-        Optional<CurrentUserSession> optional = userSessionRepository.findByUuid(key);
+        Optional<CurrentUserSession> optional = sessionRepository.findByUuid(key);
         if (!optional.isPresent()) {
             throw new UserException("Unauthorized");
         }
@@ -38,7 +38,7 @@ public class GetCurrentUserLoginSessionDetailsImpl implements GetCurrentUserLogi
     }
 
     public User getCurrentCustomer(String key) {
-        Optional<CurrentUserSession> optional = userSessionRepository.findByUuid(key);
+        Optional<CurrentUserSession> optional = sessionRepository.findByUuid(key);
         if (!optional.isPresent()) {
             throw new UserException("Unauthorized");
         }
