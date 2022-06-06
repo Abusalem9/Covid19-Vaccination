@@ -1,13 +1,15 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Dose2 {
     @Id
@@ -15,4 +17,7 @@ public class Dose2 {
     private Integer countId;
     private Integer user_id;
     private Boolean dose;
+    @OneToOne(mappedBy = "dose2")
+    @JsonBackReference
+    private DoctorDoseGeneration doctorDoseGeneration;
 }

@@ -1,11 +1,16 @@
 package com.covid.vaccination.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@ToString
 @Entity
 public class DoctorDoseGeneration {
     @Id
@@ -14,6 +19,7 @@ public class DoctorDoseGeneration {
 
     private Integer doctorId;
 
+    private Integer user_id;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Dose1 dose1;

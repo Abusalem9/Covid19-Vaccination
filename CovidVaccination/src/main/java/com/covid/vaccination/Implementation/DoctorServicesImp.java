@@ -35,12 +35,13 @@ public class DoctorServicesImp implements DoctorServices{
     }
 
     @Override
-    public String logIntoAccount(DoctorDTO DTO) {
+    public String loginAccount(DoctorDTO DTO) {
         return null;
     }
 
     @Override
-    public String logOutFromAccount(String key) {
+    public String logoutAccount(String key) {
         return null;
     }
+
 }
