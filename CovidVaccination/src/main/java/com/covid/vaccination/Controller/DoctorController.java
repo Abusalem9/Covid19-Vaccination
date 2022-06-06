@@ -2,8 +2,6 @@ package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +13,7 @@ public class DoctorController {
 
     @Autowired
 
-        private final DoctorServicesImp dsi ;
-
-        public DoctorController(DoctorServicesImp dsi) {
-            this.dsi = dsi;
-        }
+    private DoctorServicesImp dsi;
 
 
         //  Add doctors
@@ -53,7 +47,7 @@ public class DoctorController {
     @PutMapping("/updateDoctor")
     public Doctor updateDoctorDetails(@RequestParam String key,@RequestBody Doctor newDoctor) {
 
-            return  dsi.updateDoctorDetails(key,newDoctor);
+        return null;
 
     }
 

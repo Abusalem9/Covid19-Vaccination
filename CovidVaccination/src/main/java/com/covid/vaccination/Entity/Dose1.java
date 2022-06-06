@@ -11,7 +11,7 @@ public class Dose1 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer countId;
-    private Integer user_id;
+    private Integer DoseUser_id;
     private Boolean dose;
     @OneToOne(mappedBy = "dose1")
     @JsonBackReference
