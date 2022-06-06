@@ -1,4 +1,4 @@
-package com.covid.vaccination.Entity;
+package com.covid.vaccination.DTO;
 
 import lombok.Data;
 

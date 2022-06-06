@@ -1,8 +1,7 @@
 package com.covid.vaccination.Service;
 
 import com.covid.vaccination.Entity.Doctor;
-import com.covid.vaccination.Entity.DoctorDTO;
-import com.covid.vaccination.Exception.DoctorException;
+import com.covid.vaccination.DTO.DoctorDTO;
 import com.covid.vaccination.Repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
