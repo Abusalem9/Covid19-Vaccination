@@ -1,18 +1,18 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.IdProof;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.IdProofException;
 import com.covid.vaccination.Repository.IdProofRepository;
+import com.covid.vaccination.Service.IdProofService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
 import java.util.List;
-import java.util.Optional;
+
 @Service
-public class IdProofServiceImpl implements IdProofService{
+public class IdProofServiceImpl implements IdProofService {
     @Autowired
     public IdProofRepository idProofRepository;
 

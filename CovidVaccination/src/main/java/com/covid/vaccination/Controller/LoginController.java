@@ -1,7 +1,7 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.UserDTO;
-import com.covid.vaccination.Service.UserLogInImpl;
+import com.covid.vaccination.Implementation.UserLogInImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

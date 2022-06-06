@@ -1,7 +1,7 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.Dose;
-import com.covid.vaccination.Service.DoseServiceImpl;
+import com.covid.vaccination.Implementation.DoseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,16 +1,17 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Address;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.AddressException;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.AddressRepository;
+import com.covid.vaccination.Service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
-public class AddressServiceImpl implements AddressService{
+public class AddressServiceImpl implements AddressService {
     @Autowired
     public AddressRepository addressRepository;
     @Override

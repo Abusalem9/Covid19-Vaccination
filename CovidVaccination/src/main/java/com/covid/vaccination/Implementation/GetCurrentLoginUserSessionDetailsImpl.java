@@ -1,10 +1,11 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.CurrentUserSession;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.SessionRepository;
 import com.covid.vaccination.Repository.UserRepository;
+import com.covid.vaccination.Service.GetCurrentLoginUserSessionDetailsInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

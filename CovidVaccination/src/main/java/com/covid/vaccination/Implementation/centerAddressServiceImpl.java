@@ -1,9 +1,10 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.centerAddress;
 import com.covid.vaccination.Exception.AddressException;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.CenterAddressRepository;
+import com.covid.vaccination.Service.centerAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

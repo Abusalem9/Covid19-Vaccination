@@ -1,14 +1,15 @@
-package com.covid.vaccination.Service;
+package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Exception.DoctorException;
 import com.covid.vaccination.Repository.DoctorRepository;
+import com.covid.vaccination.Service.DoctorServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class DoctorServicesImp implements DoctorServices{
+public class DoctorServicesImp implements DoctorServices {
 
     @Autowired
     public DoctorRepository doctorRepository;
@@ -21,7 +22,7 @@ public class DoctorServicesImp implements DoctorServices{
     @Override
     public Doctor getDoctor(Integer did) throws DoctorException{
 //      Doctor doctor= doctorRepository.findById(did).orElseThrow( ()-> {
-//          throw  new DoctorException("Can't found doctor with this ID");
+//          throw  new DoctorException("Can't found doctor with this id");
 //      });
       return null;
     }
