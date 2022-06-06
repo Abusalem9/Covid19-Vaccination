@@ -24,23 +24,50 @@ public class DoctorServicesImp implements DoctorServices {
 
     @Override
     public void addDoctor(Doctor doctor) {
-
+        doctorRepository.save(doctor);
     }
 
     @Override
     public Doctor getDoctor(Integer did) {
-        return null;
+       Optional<Doctor> doctorOpt = doctorRepository.findById(did);
+       if(!doctorOpt.isPresent()){
+           throw new DoctorException("There is no any doctor with this ID");
+       }
+       return doctorOpt.get();
     }
 
-    @Override
-    public void deleteDoctorById(Integer did) {
 
-    }
+// removing data deletion of doctors.
+//    @Override
+//    public void deleteDoctorById(Integer did) {
+//
+//    }
 
     @Override
     public List<Doctor> getAllDoctors() {
-        return null;
+        List<Doctor> doctors = doctorRepository.findAll();
+        if(doctors.size()<=0)
+            throw new DoctorException("There is no any doctor present in Database");
+
+        return doctors;
+
     }
+
+    @Override
+    public Doctor updateDoctorDetails(String key, Doctor doctor) {
+
+      Optional<CurrentDoctorSession> session = doctorSessionRepo.findByUuid(key);
+
+      if(!session.isPresent())
+          throw new DoctorException("you are not validated to update details..");
+
+      Integer did =session.get().getId();
+
+      return doctorRepository.save(doctor);
+
+    }
+
+
 
     // Login and Logout Functionalities.. 
     // (To take charge of a particular center)

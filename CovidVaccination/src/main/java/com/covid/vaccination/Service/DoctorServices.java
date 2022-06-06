@@ -11,9 +11,13 @@ public interface DoctorServices {
 
      Doctor getDoctor(Integer did);
 
-    void deleteDoctorById(Integer did);
+     //Doctors can't delete themselves.
+//    void deleteDoctorById(Integer did);
 
     List<Doctor> getAllDoctors();
+
+
+    Doctor updateDoctorDetails( String key, Doctor doctor);
 
 
 // Doctor  Login and logout services
