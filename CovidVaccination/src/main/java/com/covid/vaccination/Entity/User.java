@@ -20,12 +20,13 @@ public class User {
     private Integer user_id;
     private String firstName;
     private String lastName;
-    @Column(unique = true,columnDefinition = "integer default 0")
+    @Column(unique = true)
     private String mobile;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private Date dob;
     private String password;
     private String gender;
-    @Column(unique = true,columnDefinition = "integer default 0")
+    @Column(unique = true)
     private String aadharNo;
     private String pinCode;
     private String city;
