@@ -16,14 +16,11 @@ public class DoctorDoseGeneration {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer doseGenerationId;
-
     private Integer doctorId;
-
     private Integer user_id;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Dose1 dose1;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Dose2 dose2;

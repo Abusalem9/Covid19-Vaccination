@@ -27,11 +27,5 @@ public class User {
     private String gender;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Address address;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
     private IdProof idProof;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Center center;
 }
