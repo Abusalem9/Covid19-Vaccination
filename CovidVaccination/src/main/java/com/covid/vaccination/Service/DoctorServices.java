@@ -18,16 +18,17 @@ public interface DoctorServices {
     List<Doctor> getAllDoctors();
 
 
-// Doctor  Login and logout services
+    Doctor updateDoctorDetails(String key, Doctor newdoctor) throws UserException;
+
+    // Doctor  Login and logout services
     String loginAccount(DoctorDTO DTO);
 
     String logoutAccount(String key);
 
-    Doctor updateDoctor(Doctor doctor) throws UserException;
 
     // new functionalities
 
-//    Doctor viewProfileIfLogedin( Integer did, String Sessionkey );
+    Doctor viewProfile( String Sessionkey );
 
 
 
