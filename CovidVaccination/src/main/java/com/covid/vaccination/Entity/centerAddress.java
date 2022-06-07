@@ -12,8 +12,8 @@ import javax.persistence.Id;
 @Data
 public class centerAddress {
     @Id
-    @JsonIgnore
     private Integer centerID;
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer address_id;
     private String city;

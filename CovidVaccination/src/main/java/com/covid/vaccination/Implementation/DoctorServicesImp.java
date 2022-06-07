@@ -52,7 +52,6 @@ public class DoctorServicesImp implements DoctorServices {
 @Override
     public Doctor updateDoctorDetails(String key, Doctor newdoctor) throws UserException {
 
-        // Special update condition for admins.
         if (key.equals("1111")){
            return doctorRepo.save(newdoctor);
         }
