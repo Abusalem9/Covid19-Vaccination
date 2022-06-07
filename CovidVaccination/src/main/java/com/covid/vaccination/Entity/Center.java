@@ -21,8 +21,4 @@ public class Center {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private centerAddress centerAddress;
-
-    @OneToOne(mappedBy = "center")
-    @JsonBackReference
-    private User user;
 }

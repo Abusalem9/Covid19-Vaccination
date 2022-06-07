@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +19,8 @@ public class Dose2 {
     private Integer countId;
     @Column(unique = true,columnDefinition = "integer default 0")
     private Integer user_id;
-    private Boolean dose;
+    private LocalDateTime date= LocalDateTime.now();
+    private Integer doctor_id;
     @OneToOne(mappedBy = "dose2")
     @JsonBackReference
     private DoctorDoseGeneration doctorDoseGeneration;

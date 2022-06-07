@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Repository
 public interface AddressRepository extends JpaRepository<Address,Integer> {
+    @Query("select u from  Address u where  u.user_id=:n")
+    Optional<Address> findByUser_id(@Param("n") Integer id);
+    @Query("select u from  Address u where  u.user_id=:n")
+    Optional<Address> deleteByUser_id(@Param("n") Integer id);
 }

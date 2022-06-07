@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 public class Dose {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer countId;
+    private Integer id;
     @Column(unique = true,columnDefinition = "integer default 0")
     private Integer user_id;
-
 }
