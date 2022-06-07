@@ -13,8 +13,10 @@ public class centerAddressController {
     @Autowired
     public centerAddressServiceImpl usi;
 
+
     @PostMapping("/createCenterAddress")
     public centerAddress createCenterAddress(@RequestBody centerAddress centerAddress) {
+
 
         usi.saveCenterAddress(centerAddress);
 

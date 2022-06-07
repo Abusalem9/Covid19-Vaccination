@@ -1,28 +1,29 @@
 package com.covid.vaccination.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 @Data
 @Entity
 public class Center {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer centerID;
-    private String centerName;
-    private Integer count;
+    private Integer user_Id;
+    private String pinCode;
     @Enumerated(EnumType.STRING)
     private Slot slot;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private centerAddress centerAddress;
-
-    @OneToOne(mappedBy = "center")
-    @JsonBackReference
-    private User user;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private centerAddress centerAddress;
+//
+//    @OneToOne(mappedBy = "center")
+//    @JsonBackReference
+//    private User user;
 }

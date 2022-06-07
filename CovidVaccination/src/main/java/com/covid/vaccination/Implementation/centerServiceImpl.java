@@ -3,7 +3,9 @@ package com.covid.vaccination.Implementation;
 import com.covid.vaccination.Entity.Center;
 import com.covid.vaccination.Exception.AddressException;
 import com.covid.vaccination.Exception.UserException;
+import com.covid.vaccination.Repository.CenterAddressRepository;
 import com.covid.vaccination.Repository.CenterRepository;
+import com.covid.vaccination.Repository.UserRepository;
 import com.covid.vaccination.Service.centerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,27 @@ public class centerServiceImpl implements centerService {
     @Autowired
     private CenterRepository centerRepository;
 
+    @Autowired
+    private CenterAddressRepository centerAddressRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public Center saveCenter(Center center) {
-        return centerRepository.save(center);
+
+        if (centerAddressRepository.existsById(center.getCenterID())) {
+            if (userRepository.existsById(center.getUser_Id())) {
+                return centerRepository.save(center);
+            } else {
+                throw new AddressException("No user available for this user Id, kindly check UserId");
+            }
+
+        } else {
+            throw new AddressException("No center present at this address");
+        }
+
+
     }
 
     @Override
