@@ -1,10 +1,8 @@
 package com.covid.vaccination.Controller;
 
-import com.covid.vaccination.Entity.Address;
 import com.covid.vaccination.Entity.Center;
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Entity.User;
-import com.covid.vaccination.Implementation.AddressServiceImpl;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
 import com.covid.vaccination.Implementation.UserServiceImpl;
 import com.covid.vaccination.Implementation.centerAllocationServiceImpl;
@@ -24,8 +22,6 @@ public class AdminController {
 
     @Autowired
     public DoctorServicesImp doctorServicesImp;
-    @Autowired
-    public AddressServiceImpl addressService;
 
     @GetMapping("/Admin/User/{id}")
     public User getUserById(@PathVariable("id") Integer id) {
@@ -55,33 +51,6 @@ public class AdminController {
     @PutMapping("/Admin/updateUser")
     public User updateUserByUsingId(@RequestBody User user,@RequestParam String key){
         return usi.updateUser(user,key);
-    }
-
-    @PostMapping("/Admin/Address/createAddress")
-    public Address createAddress(@Valid @RequestBody Address address){
-        addressService.saveAddress(address);
-        return address;
-    }
-
-    //    get Address Using Address_id
-    @GetMapping("/Admin/Address/{id}")
-    public Address getAddressById(@Valid @PathVariable("id") Integer id) {
-
-        return addressService.getAddressById(id);
-
-    }
-//    Get All Addresss
-
-    // Delete Address By Id
-    @DeleteMapping("/Admin/Address/deleteAddress/{id}")
-    public Address deleteAddressUsingId(@Valid @PathVariable("id") Integer id) {
-        return addressService.deleteAddressById(id);
-    }
-
-    // Update Address Using KeyaddressService.
-    @PutMapping("/Admin/Address/updateAddress")
-    public Address updateAddressByUsingId(@Valid @RequestBody Address address, @RequestParam String key) {
-        return addressService.updateAddressByCustom(address.getAddress_id(), key);
     }
 
     @GetMapping("/Admin/Doctors/getAllDoctors")
