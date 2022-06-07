@@ -7,7 +7,7 @@ import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Implementation.AddressServiceImpl;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
 import com.covid.vaccination.Implementation.UserServiceImpl;
-import com.covid.vaccination.Implementation.centerServiceImpl;
+import com.covid.vaccination.Implementation.centerAllocationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    public centerServiceImpl cImpl;
+    public centerAllocationServiceImpl cImpl;
     @Autowired
     public UserServiceImpl usi;
 

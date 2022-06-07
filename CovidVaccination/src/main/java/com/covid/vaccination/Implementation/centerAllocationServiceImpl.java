@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class centerServiceImpl implements centerService {
+public class centerAllocationServiceImpl implements centerService {
 
     @Autowired
     private CenterRepository centerRepository;

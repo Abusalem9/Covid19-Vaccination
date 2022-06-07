@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class centerAddressServiceImpl implements centerAddressService {
+public class centerCreationServiceImpl implements centerAddressService {
 
 
     @Autowired

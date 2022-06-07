@@ -1,21 +1,21 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.centerAddress;
-import com.covid.vaccination.Implementation.centerAddressServiceImpl;
+import com.covid.vaccination.Implementation.centerCreationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class centerAddressController {
+public class centerCreationController {
 
     @Autowired
-    public centerAddressServiceImpl usi;
+    public centerCreationServiceImpl usi;
 
 
-    @PostMapping("/createCenterAddress")
-    public centerAddress createCenterAddress(@RequestBody centerAddress centerAddress) {
+    @PostMapping("/createCenter")
+    public centerAddress createCenter(@RequestBody centerAddress centerAddress) {
 
 
         usi.saveCenterAddress(centerAddress);
