@@ -71,6 +71,6 @@ public class AddressServiceImpl implements AddressService {
             existingAddress.setPinCode(pinCode);
             return addressRepository.save(existingAddress);
         }else
-            throw new AddressException("Address does not exist with this Id :"+id);
+            throw new AddressException("Address does not exist with this User Id :"+id);
     }
 }
