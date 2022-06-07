@@ -16,16 +16,14 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonIgnore
     private Integer user_id;
     private String firstName;
     private String lastName;
-    private Integer age;
+    @Column(unique = true,columnDefinition = "integer default 0")
     private String mobile;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date dob;
     private String password;
     private String gender;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private IdProof idProof;
 }

@@ -12,18 +12,10 @@ import javax.persistence.Id;
 public class Center {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer centerID;
     private Integer user_Id;
     private String pinCode;
     @Enumerated(EnumType.STRING)
     private Slot slot;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    private centerAddress centerAddress;
-//
-//    @OneToOne(mappedBy = "center")
-//    @JsonBackReference
-//    private User user;
 }

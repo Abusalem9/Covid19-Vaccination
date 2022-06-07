@@ -1,5 +1,6 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -11,15 +12,11 @@ import javax.persistence.Id;
 @Data
 public class centerAddress {
     @Id
+    @JsonIgnore
     private Integer centerID;
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer address_id;
     private String city;
     private String state;
     private String pinCode;
-
-
-//    @OneToOne(mappedBy = "centerAddress")
-//    @JsonBackReference
-//    private Center center;
 }

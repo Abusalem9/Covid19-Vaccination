@@ -1,8 +1,6 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.Doctor;
-import com.covid.vaccination.Entity.Dose;
-import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,6 @@ public class DoctorController {
     @Autowired
 
     private DoctorServicesImp dsi;
-
 
     //  Add doctors
     @PostMapping("/addDoctor")

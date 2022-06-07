@@ -1,5 +1,6 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -19,6 +20,7 @@ public class CurrentUserSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer id;
 
     private String uuid;

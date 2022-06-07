@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 public class DoctorDTO {
-
     private String mobile;
     private Center centerId;
     private String password;
-
 }

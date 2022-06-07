@@ -1,5 +1,6 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Entity
 public class DoctorDoseGeneration {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer doseGenerationId;
     private Integer doctorId;

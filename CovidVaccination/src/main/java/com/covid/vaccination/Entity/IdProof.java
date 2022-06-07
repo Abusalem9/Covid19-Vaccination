@@ -1,6 +1,7 @@
 package com.covid.vaccination.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,10 +11,8 @@ import javax.persistence.*;
 public class IdProof {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer refId;
     private String aadharNo;
     private String panCardNo;
-    @OneToOne(mappedBy = "idProof")
-    @JsonBackReference
-    private User user;
 }
