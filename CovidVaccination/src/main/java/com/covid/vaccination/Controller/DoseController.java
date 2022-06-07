@@ -9,32 +9,5 @@ import java.util.List;
 
 @RestController
 public class DoseController {
-    @Autowired
-    public DoseServiceImpl usi;
 
-    //    Create Dose
-    @PostMapping("/createDose")
-    public Dose createDose(@RequestBody Dose user){
-        usi.saveDose(user);
-        return user;
-    }
-
-    //    get Dose Using Dose_id
-    @GetMapping("/Dose/{id}")
-    public Dose getDoseById(@PathVariable("id") Integer id) {
-
-        return usi.getDoseById(id);
-
-    }
-//    Get All Doses
-
-    @GetMapping("/Doses")
-    public List<Dose> getAllDoseFromDB(){
-        return usi.getAllDoses();
-    }
-
-    @PutMapping("/updateDose")
-    public Dose updateDoseByUsingId(@RequestBody Dose user,@RequestParam String key){
-        return usi.updateDose(user,key);
-    }
 }

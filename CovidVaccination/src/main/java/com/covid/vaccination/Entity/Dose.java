@@ -1,12 +1,10 @@
 package com.covid.vaccination.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +12,8 @@ import java.time.LocalDateTime;
 public class Dose {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long doseRefId;
+    private Integer countId;
+    @Column(unique = true,columnDefinition = "integer default 0")
     private Integer user_id;
-    private boolean dose=true;
+
 }
