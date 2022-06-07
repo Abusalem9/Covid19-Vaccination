@@ -108,7 +108,8 @@ public class AdminController {
 
     @PutMapping("/Admin/updateDoctor")
     public Doctor updateDoctor(@RequestBody Doctor doctor) {
-        return doctorServicesImp.updateDoctor(doctor);
+
+        return doctorServicesImp.updateDoctorDetails("1111",doctor);
     }
 
     @PutMapping("/Admin/updateCenter")
