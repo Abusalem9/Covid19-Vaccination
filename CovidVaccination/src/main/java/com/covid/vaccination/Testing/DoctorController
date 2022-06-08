@@ -1,0 +1,61 @@
+
+Doctor Controller:
+
+user:
+[
+  {
+    "email": "string",
+    "firstName": "string",
+    "gender": "string",
+    "lastName": "string",
+    "mobile": "string",
+    "password": "string"
+  }
+]
+-------------------------------
+
+POST
+/addDoctor
+
+Response body:
+Doctor Has Been Added Successfully.
+
+
+------------------------------
+GET
+/doctors
+getAllDoctors
+
+Response body:
+[
+  {
+    "email": "string",
+    "firstName": "string",
+    "gender": "string",
+    "lastName": "string",
+    "mobile": "string",
+    "password": "string"
+  }
+]
+
+getAllDoctors
+
+Response body
+[
+  {
+    "firstName": "string",
+    "lastName": "string",
+    "mobile": "string",
+    "password": "string",
+    "gender": "string",
+    "email": "string"
+  },
+  {
+    "firstName": "mohit",
+    "lastName": "agrawal",
+    "mobile": "9619753340",
+    "password": "123456",
+    "gender": "M",
+    "email": "mohit@doctor.com"
+  }
+]

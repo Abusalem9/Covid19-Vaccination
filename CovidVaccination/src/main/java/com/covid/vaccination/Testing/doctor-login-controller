@@ -1,0 +1,142 @@
+POST  (Entered wrong password)
+/doctorlogin
+logInDoctor
+
+{
+  "centerId": {
+    "centerID": 0,
+    "pinCode": "string",
+    "slot": "SLOT11000TO1030",
+    "user_Id": 0
+  },
+  "mobile": "9619753340",
+  "password": "12345"
+}
+
+Response body
+{
+  "timestamp": "2022-06-08T11:20:17.4019169",
+  "message": "Please Enter Valid Password",
+  "details": "uri=/doctorlogin"
+}
+
+------------------------------------------
+POST (Entered Correct password)
+/doctorlogin
+logInDoctor
+
+{
+  "centerId": {
+    "centerID": 0,
+    "pinCode": "string",
+    "slot": "SLOT11000TO1030",
+    "user_Id": 0
+  },
+  "mobile": "9619753340",
+  "password": "123456"
+}
+
+
+Response body:
+CurrentDoctorSession(id=14, uuid=pBROeQ, localDateTime=2022-06-08T11:21:38.452664900)
+----------------------------------------------------
+POST (Entered wrong Mobile)
+/doctorlogin
+logInDoctor
+
+{
+  "centerId": {
+    "centerID": 0,
+    "pinCode": "string",
+    "slot": "SLOT11000TO1030",
+    "user_Id": 0
+  },
+  "mobile": "961740",
+  "password": "123456"
+}
+
+
+
+Response body
+
+{
+  "timestamp": "2022-06-08T11:22:57.6121368",
+  "message": "Please Enter Valid Mobile No",
+  "details": "uri=/doctorlogin"
+}
+----------------------------------------------------------
+POST (Entered Correct Mobile)
+/doctorlogin
+logInDoctor
+
+
+{
+  "centerId": {
+    "centerID": 0,
+    "pinCode": "string",
+    "slot": "SLOT11000TO1030",
+    "user_Id": 0
+  },
+  "mobile": "9619753340",
+  "password": "123456"
+}
+
+
+Response body
+Download
+CurrentDoctorSession(id=14, uuid=owGesz, localDateTime=2022-06-08T11:23:39.474162700)
+
+-----------------------------------------------
+POST (Entered Both Wrong Mobile & pass)
+/doctorlogin
+logInDoctor
+
+
+{
+  "centerId": {
+    "centerID": 0,
+    "pinCode": "string",
+    "slot": "SLOT11000TO1030",
+    "user_Id": 0
+  },
+  "mobile": "96197530",
+  "password": "1456"
+}
+
+Response body
+{
+  "timestamp": "2022-06-08T11:24:29.4154009",
+  "message": "Please Enter Valid Mobile No",
+  "details": "uri=/doctorlogin"
+}
+--------------------------------------------
+PATCH  (Wrong uuid)
+/doctorlogout
+logOutDoctor
+
+Key: VO123   //(uuid)
+
+
+Response body
+
+{
+  "timestamp": "2022-06-08T11:31:35.7965009",
+  "message": "Doctor is not logged in with this number",
+  "details": "uri=/doctorlogout"
+}
+
+--------------------------------------------
+PATCH (correct uuid)
+/doctorlogout
+logOutDoctor
+
+Key: V7OJPr   //(uuid)
+
+
+Response body
+Logged Out...
+-----------------------------------------
+
+
+
+
