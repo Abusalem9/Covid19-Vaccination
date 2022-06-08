@@ -19,7 +19,6 @@ public class centerCreationController {
     @PostMapping("/createCenter")
     public ResponseEntity<centerAddress> createCenter(@RequestBody centerAddress centerAddress) {
 
-
         usi.saveCenterAddress(centerAddress);
 
         return new ResponseEntity<>(centerAddress, HttpStatus.OK);

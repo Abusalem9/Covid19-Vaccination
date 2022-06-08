@@ -1,20 +1,16 @@
 package com.covid.vaccination.Controller;
 
-import com.covid.vaccination.Entity.Center;
-import com.covid.vaccination.Entity.Doctor;
-import com.covid.vaccination.Entity.Dose1;
-import com.covid.vaccination.Entity.User;
+import com.covid.vaccination.Entity.*;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
 import com.covid.vaccination.Implementation.Dose1ServiceImpl;
 import com.covid.vaccination.Implementation.UserServiceImpl;
 import com.covid.vaccination.Implementation.centerAllocationServiceImpl;
 import com.covid.vaccination.Repository.UserRepository;
+import com.covid.vaccination.Repository.VaccineStorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,6 +29,9 @@ public class AdminController {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public VaccineStorageRepository vaccineStorageRepository;
+
     @GetMapping("/Admin/User/{id}")
     public User getUserById(@PathVariable("id") Integer id) {
         return usi.getUserById(id);
@@ -40,9 +39,10 @@ public class AdminController {
 //    Get All Users
 
     @GetMapping("/Admin/Users")
-    public List<User> getAllUserFromDB(){
+    public List<User> getAllUserFromDB() {
         return usi.getAllUsers();
     }
+
     @GetMapping("/Admin/Doctors/getAllDoctors")
     public ResponseEntity<List<Doctor>> getAllDoctorFromDB() {
         return doctorServicesImp.getAllDoctors();
@@ -80,11 +80,6 @@ public class AdminController {
         usi.saveUser(user);
         return "User Has Been Added Into DataBase.";
     }
-    @PostMapping("/Admin/createCenter")
-    public Center createCenterAddress(@RequestBody Center center) {
-        cImpl.saveCenter(center);
-        return center;
-    }
     @PostMapping("/Admin/createDoctor")
     public String createDoctor(@RequestBody Doctor doctor) {
         doctorServicesImp.addDoctor(doctor);
@@ -119,6 +114,12 @@ public class AdminController {
     @DeleteMapping("/Admin/deleteDoctor/{id}")
     public ResponseEntity<Doctor> deleteDoctorUsingId(@PathVariable("id") Integer id) {
 
-               return doctorServicesImp.deleteDoctorById(id);
+        return doctorServicesImp.deleteDoctorById(id);
+    }
+
+    @PostMapping("/Admin/AddingVaccinTocenter")
+    public String AddingVaccinTocenter(@RequestBody VaccineStorage vaccineStorage) {
+        vaccineStorageRepository.save(vaccineStorage);
+        return "Vaccine Has Been Added Into center.";
     }
 }

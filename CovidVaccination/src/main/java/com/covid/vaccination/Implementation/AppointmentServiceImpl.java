@@ -1,13 +1,9 @@
 package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Appointment;
-import com.covid.vaccination.Entity.Dose1;
-import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
-import com.covid.vaccination.Repository.AppointmentRepository;
-import com.covid.vaccination.Repository.Dose1Repository;
-import com.covid.vaccination.Repository.Dose2Repository;
+import com.covid.vaccination.Repository.*;
 import com.covid.vaccination.Service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,28 +19,43 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentRepository appointmentRepository;
 
     @Autowired
-    public  UserServiceImpl userService;
+    public UserServiceImpl userService;
 
     @Autowired
     public Dose1Repository dose1Repository;
     @Autowired
     public Dose2Repository dose2Repository;
 
+    @Autowired
+    CenterAddressRepository centerAddressRepository;
+
+    @Autowired
+    VaccineStorageRepository vaccineStorageRepository;
+
     @Override
     public ResponseEntity<Appointment> setAppointment(Appointment appointment) {
-        if (userService.getUserById(appointment.getUser_id()).getPassword().equals(appointment.getPassword())) {
-            if (dose2Repository.getDose2ByUser_id(appointment.getUser_id()) != null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already User Has Taken Both Doses.");
-            }
-            Appointment optional = appointmentRepository.findByUser_id(appointment.getUser_id());
-            if (optional == null) {
-                Appointment result = appointmentRepository.save(appointment);
-                return new ResponseEntity<>(result, HttpStatus.OK);
-            } else
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Generated an Appointment Please Wait for Doctor Approval.");
 
-        }else
-            throw new UserAlreadyExistWithMobileNumber("Please Fill Correct User Id & Password");
+        if (centerAddressRepository.existsById(appointment.getCenter_id())) {
+
+            if (userService.getUserById(appointment.getUser_id()).getPassword().equals(appointment.getPassword())) {
+                if (dose2Repository.getDose2ByUser_id(appointment.getUser_id()) != null) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already User Has Taken Both Doses.");
+                }
+                Appointment optional = appointmentRepository.findByUser_id(appointment.getUser_id());
+                if (optional == null) {
+                    Appointment result = appointmentRepository.save(appointment);
+
+
+                    return new ResponseEntity<>(result, HttpStatus.OK);
+                } else
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Generated an Appointment Please Wait for Doctor Approval.");
+
+            } else
+                throw new UserAlreadyExistWithMobileNumber("Please Fill Correct User Id & Password");
+        } else {
+            throw new UserAlreadyExistWithMobileNumber("No center available with this center Id, Kindly enter correct center ID");
+        }
+
     }
 
     @Override
