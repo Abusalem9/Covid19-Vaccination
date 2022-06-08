@@ -1,13 +1,11 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.*;
-import com.covid.vaccination.Implementation.DoctorServicesImp;
-import com.covid.vaccination.Implementation.Dose1ServiceImpl;
-import com.covid.vaccination.Implementation.UserServiceImpl;
-import com.covid.vaccination.Implementation.centerAllocationServiceImpl;
+import com.covid.vaccination.Implementation.*;
 import com.covid.vaccination.Repository.UserRepository;
 import com.covid.vaccination.Repository.VaccineStorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +14,7 @@ import java.util.List;
 @RestController
 public class AdminController {
 
-    @Autowired
-    public centerAllocationServiceImpl cImpl;
+
     @Autowired
     public UserServiceImpl usi;
 
@@ -52,20 +49,14 @@ public class AdminController {
         return doctorServicesImp.getDoctor(dUserId);
     }
 
-    @GetMapping("/Admin/getCenter/{id}")
-    public Center getCenterAddressById(@PathVariable("id") Integer id) {
 
-        return cImpl.getCenterById(id);
-    }
-
-    @GetMapping("/Admin/getAllCenter/")
-    public List<Center> getCenterAddressById() {
-
-        return cImpl.getAllCenter();
-    }
     @GetMapping("/Admin/getAllDose1CompletedUsers")
     public List<Dose1> getAllDose1CompletedUsers(){
         return dose1Serviceimpl.getAllUser();
+    }
+    @GetMapping("/Admin/BothDoseDone")
+    public List<User> getAllDoseCompletedUsers(){
+        return userRepository.getAllBothDoseCompleted();
     }
     @GetMapping("/Admin/GetUserByAadhar/{AadharNo}")
     public User getUserByAadharNo(@PathVariable("AadharNo")String id){
@@ -94,21 +85,11 @@ public class AdminController {
 
         return doctorServicesImp.updateDoctorDetails("1111",doctor);
     }
-    @PutMapping("/Admin/updateCenter")
-    public Center updateCenter(@RequestBody Center center) {
-        cImpl.saveCenter(center);
-        return center;
-    }
+
     @DeleteMapping("/Admin/deleteUser/{id}")
     public User deleteUserByUserId(@PathVariable("id") Integer id){
 
         return usi.deleteUserById(id);
-    }
-
-    @DeleteMapping("/Admin/deleteCenter/{id}")
-    public Center deleteCenterCenterId(@PathVariable("id") Integer id) {
-
-        return cImpl.deleteCenterId(id);
     }
 
     @DeleteMapping("/Admin/deleteDoctor/{id}")
@@ -121,5 +102,52 @@ public class AdminController {
     public String AddingVaccinTocenter(@RequestBody VaccineStorage vaccineStorage) {
         vaccineStorageRepository.save(vaccineStorage);
         return "Vaccine Has Been Added Into center.";
+    }
+    @Autowired
+    public CenterCreationServiceImpl centerCreationService;
+
+
+    @PostMapping("/createCenter")
+    public ResponseEntity<centerAddress> createCenter(@RequestBody centerAddress centerAddress) {
+
+        centerCreationService.saveCenterAddress(centerAddress);
+
+        return new ResponseEntity<>(centerAddress, HttpStatus.OK);
+    }
+
+    @GetMapping("/Admin/GetCenter/{id}")
+    public ResponseEntity<centerAddress> getCenterById(@PathVariable("id")Integer id){
+        centerAddress c= centerCreationService.getCenterAddressById(id);
+        if(c!=null){
+            return new ResponseEntity<>(c,HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/Admin/GetAllCenter")
+    public  ResponseEntity<List<centerAddress>> getAllAddress(){
+        List<centerAddress> list = centerCreationService.getAllCenterList();
+        if(list!=null){
+            return new ResponseEntity<>(list,HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/Admin/Delete/{id}")
+    public ResponseEntity<centerAddress> deleteCenterById(@PathVariable("id")Integer id){
+        centerAddress c=centerCreationService.deleteCenterById(id);
+        if(c!=null){
+            return new ResponseEntity<>(c,HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/Admin/updateCenter")
+    public centerAddress updateCenter(@RequestBody centerAddress center) {
+        centerCreationService.saveCenterAddress(center);
+        return center;
     }
 }

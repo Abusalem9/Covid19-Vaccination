@@ -25,7 +25,7 @@ public class User {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date dob;
     private String password;
-    private String gender;
+    private Gender gender;
     @Column(unique = true)
     private String aadharNo;
     private String pinCode;

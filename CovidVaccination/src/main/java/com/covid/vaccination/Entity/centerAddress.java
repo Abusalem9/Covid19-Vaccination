@@ -12,10 +12,9 @@ import javax.persistence.Id;
 @Data
 public class centerAddress {
     @Id
-    private Integer centerID;
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer address_id;
+    private Integer centerID;
     private String city;
     private String state;
     private String pinCode;
