@@ -1,6 +1,7 @@
 package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Appointment;
+import com.covid.vaccination.Entity.VaccineStorage;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.*;
@@ -34,7 +35,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public ResponseEntity<Appointment> setAppointment(Appointment appointment) {
-
+        VaccineStorage v=vaccineStorageRepository.findByCenterID(appointment.getCenter_id());
+        if(v.getAvailableStock()<=0){
+            throw new UserAlreadyExistWithMobileNumber("No vaccine Available at this Center");
+        }
         if (centerAddressRepository.existsById(appointment.getCenter_id())) {
 
             if (userService.getUserById(appointment.getUser_id()).getPassword().equals(appointment.getPassword())) {

@@ -25,24 +25,36 @@ public class DoseGenerationImpl implements DoseGenerationService {
     public DoctorServicesImp doctorServicesImp;
     @Autowired
     public DoctorRepository doctorRepository;
+
+    @Autowired
+    public VaccineStorageRepository vaccineStorageRepository;
+
+    @Autowired
+    public VaccineStorageServiceImpl vaccineStorageService;
     
     public String generatedDose(DoctorDoseGeneration doctorDoseGeneration) {
         Doctor d=doctorRepository.getDoctorByDoctorId(doctorDoseGeneration.getDoctorId());
+        Appointment appointment=appointmentRepository.findByUser_id(doctorDoseGeneration.getUser_id());
+        Dose1 dose1 = dose1Repository.getDose1ByUser_id(doctorDoseGeneration.getUser_id());
+        Dose2 dose2 = dose2Repository.getDose2ByUser_id(doctorDoseGeneration.getUser_id());
+        VaccineStorage v=vaccineStorageRepository.findByCenterID(appointment.getCenter_id());
+        if(v.getAvailableStock()<=0){
+            throw new UserAlreadyExistWithMobileNumber("No vaccine Available at this Center");
+        }
         if(d!=null){
             if(doctorDoseGeneration.getD_password().equals(d.getPassword())){
-                Dose1 dose1 = dose1Repository.getDose1ByUser_id(doctorDoseGeneration.getUser_id());
-                Dose2 dose2 = dose2Repository.getDose2ByUser_id(doctorDoseGeneration.getUser_id());
-                Appointment appointment=appointmentRepository.findByUser_id(doctorDoseGeneration.getUser_id());
-
                 if (dose1 == null && dose2 == null&&appointment!=null) {
                     doseGenerationRepository.save(doctorDoseGeneration);
+                    vaccineStorageService.updateVaccineStorage(appointment.getCenter_id());
                     appointmentRepository.delete(appointment);
                     return "Dose 1 SuccessFully Vaccinated";
                 }
 
-                else if ((dose1 != null) && dose2 == null) {
+                else if ((dose1 != null) && dose2 == null && appointment!=null) {
                     if(doctorDoseGeneration.getDose1()==null){
                         doseGenerationRepository.save(doctorDoseGeneration);
+                        vaccineStorageService.updateVaccineStorage(appointment.getCenter_id());
+                        appointmentRepository.delete(appointment);
                         return "Dose 2 Successfully Vaccinated";
                     }else {
                         return "Already Dose 1 Completed";
@@ -51,7 +63,7 @@ public class DoseGenerationImpl implements DoseGenerationService {
                     return "You Are Fully Vaccinated";
                 }
                 else
-                    return "Please Book Your Slot";
+                    return "Please Book Your Appointment";
             }
             else
                 throw new UserAlreadyExistWithMobileNumber("Please Fill Correct Doctor Password");

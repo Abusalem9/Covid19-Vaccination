@@ -10,8 +10,6 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class VaccineStorage {
-//    private Center c;
-
     @Id
     private Integer id;
     private Integer availableStock;
