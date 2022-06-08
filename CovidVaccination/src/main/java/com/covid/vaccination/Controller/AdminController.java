@@ -10,6 +10,8 @@ import com.covid.vaccination.Implementation.UserServiceImpl;
 import com.covid.vaccination.Implementation.centerAllocationServiceImpl;
 import com.covid.vaccination.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -42,7 +44,7 @@ public class AdminController {
         return usi.getAllUsers();
     }
     @GetMapping("/Admin/Doctors/getAllDoctors")
-    public List<Doctor> getAllDoctorFromDB() {
+    public ResponseEntity<List<Doctor>> getAllDoctorFromDB() {
         return doctorServicesImp.getAllDoctors();
     }
     @GetMapping("/Admin/Doctor/{dUserId}")
@@ -93,7 +95,7 @@ public class AdminController {
         return usi.updateUser(user,key);
     }
     @PutMapping("/Admin/updateDoctor")
-    public Doctor updateDoctor(@RequestBody Doctor doctor) {
+    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) {
 
         return doctorServicesImp.updateDoctorDetails("1111",doctor);
     }
@@ -115,7 +117,8 @@ public class AdminController {
     }
 
     @DeleteMapping("/Admin/deleteDoctor/{id}")
-    public Doctor deleteDoctorUsingId(@PathVariable("id") Integer id) {
-        return doctorServicesImp.deleteDoctorById(id);
+    public ResponseEntity<Doctor> deleteDoctorUsingId(@PathVariable("id") Integer id) {
+
+               return doctorServicesImp.deleteDoctorById(id);
     }
 }

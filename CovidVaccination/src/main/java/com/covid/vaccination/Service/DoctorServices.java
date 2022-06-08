@@ -12,7 +12,7 @@ public interface DoctorServices {
 
     ResponseEntity<Doctor> addDoctor(Doctor doctor);
 
-    ResponseEntity<Doctor> getDoctor(Integer did);
+    Doctor getDoctor(Integer did);
 
     ResponseEntity<Doctor> deleteDoctorById(Integer did);
 
@@ -29,7 +29,7 @@ public interface DoctorServices {
 
     // new functionalities
 
-    Doctor viewProfile( String Sessionkey );
+    ResponseEntity<Doctor> viewProfile( String Sessionkey );
 
 
 

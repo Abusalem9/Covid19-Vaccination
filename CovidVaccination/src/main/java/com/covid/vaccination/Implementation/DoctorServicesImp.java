@@ -29,26 +29,32 @@ public class DoctorServicesImp implements DoctorServices {
     private DoctorSessionRepository doctorSessionRepo;
 
     @Override
-    public Doctor addDoctor(Doctor doctor) {
-        return doctorRepo.save(doctor);
+    public ResponseEntity<Doctor> addDoctor(Doctor doctor) {
+
+        return new ResponseEntity<>(doctorRepo.save(doctor),HttpStatus.OK);
     }
 
     @Override
     public Doctor getDoctor(Integer did) {
-        return null;
+
+        Optional<Doctor> doctorOpt = doctorRepo.findByDoctorId(did);
+        if(!doctorOpt.isPresent()){
+            throw new DoctorException("Doctor not exist with this ID "+did);
+        }
+        return doctorOpt.get();
     }
 
     @Override
-    public Doctor deleteDoctorById(Integer did) {
+    public ResponseEntity<Doctor> deleteDoctorById(Integer did) {
 
         Doctor existingDoctor = doctorRepo.findById(did).orElseThrow(() -> new UserException("Doctor does not exist with this Id :" + did));
         doctorRepo.delete(existingDoctor);
-        return existingDoctor;
+        return new ResponseEntity<>(existingDoctor,HttpStatus.OK);
     }
 
     @Override
-    public List<Doctor> getAllDoctors() {
-        return doctorRepo.findAll();
+    public ResponseEntity<List<Doctor>> getAllDoctors() {
+        return new ResponseEntity<>(doctorRepo.findAll(),HttpStatus.OK);
     }
 
 @Override
@@ -128,7 +134,7 @@ public class DoctorServicesImp implements DoctorServices {
 
     // View Profile If logedIn
     @Override
-    public Doctor viewProfile(String sessionkey) {
+    public ResponseEntity<Doctor> viewProfile(String sessionkey) {
 
         Optional<CurrentDoctorSession> sessionOpt = doctorSessionRepo.findByUuid(sessionkey);
 
@@ -139,7 +145,7 @@ public class DoctorServicesImp implements DoctorServices {
 
         Optional<Doctor> doctorOpt = doctorRepo.findById(session.getId());
 
-        return doctorOpt.get();
+        return new ResponseEntity<>(doctorOpt.get(),HttpStatus.OK);
 
     }
 
