@@ -17,6 +17,9 @@ public interface   UserRepository extends JpaRepository<User, Integer> {
         @Query("select u from User  u where u.mobile=:n")
         User getUsersByMobileNo(@Param("n")String n);
 
+        @Query("select u from User u,Dose2 d where u.user_id=d.user_id ")
+        List<User> getAllBothDoseCompleted();
+
         Optional<User> findByMobile(String mobileNo);
 
 

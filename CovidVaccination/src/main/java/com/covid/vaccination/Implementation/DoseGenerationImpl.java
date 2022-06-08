@@ -48,8 +48,10 @@ public class DoseGenerationImpl implements DoseGenerationService {
             }else {
                 return "Already Dose 1 Completed";
             }
-        } else {
+        } else if(dose1!=null&&dose2!=null){
             return "You Are Fully Vaccinated";
         }
+        else
+            return "Please Book Your Slot";
     }
 }
