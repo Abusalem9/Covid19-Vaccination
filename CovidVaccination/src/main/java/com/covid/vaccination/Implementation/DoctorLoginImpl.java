@@ -12,6 +12,7 @@ import com.covid.vaccination.Repository.DoctorSessionRepository;
 import com.covid.vaccination.Service.DoctorLogin;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -83,6 +84,7 @@ public class DoctorLoginImpl implements DoctorLogin {
 
         return "Logged Out...";
     }
+
 
 
 }
