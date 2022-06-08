@@ -3,22 +3,23 @@ package com.covid.vaccination.Service;
 import com.covid.vaccination.DTO.DoctorDTO;
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Exception.UserException;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 
 public interface DoctorServices {
 
-    Doctor addDoctor(Doctor doctor);
+    ResponseEntity<Doctor> addDoctor(Doctor doctor);
 
-     Doctor getDoctor(Integer did);
+    ResponseEntity<Doctor> getDoctor(Integer did);
 
-    Doctor deleteDoctorById(Integer did);
+    ResponseEntity<Doctor> deleteDoctorById(Integer did);
 
-    List<Doctor> getAllDoctors();
+    ResponseEntity<List<Doctor>> getAllDoctors();
 
 
-    Doctor updateDoctorDetails(String key, Doctor newdoctor) throws UserException;
+    ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) throws Exception;
 
     // Doctor  Login and logout services
     String loginAccount(DoctorDTO DTO);

@@ -11,6 +11,8 @@ import com.covid.vaccination.Repository.DoctorSessionRepository;
 import com.covid.vaccination.Service.DoctorServices;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -50,10 +52,10 @@ public class DoctorServicesImp implements DoctorServices {
     }
 
 @Override
-    public Doctor updateDoctorDetails(String key, Doctor newdoctor) throws UserException {
+    public ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) {
 
         if (key.equals("1111")){
-           return doctorRepo.save(newdoctor);
+           return new ResponseEntity<>(doctorRepo.save(newdoctor), HttpStatus.OK);
         }
 
         Optional<CurrentDoctorSession> sessionOpt = doctorSessionRepo.findByUuid(key);
@@ -71,8 +73,9 @@ public class DoctorServicesImp implements DoctorServices {
             throw new DoctorException("You are not supposed to update others Details..");
         }
 
-        return doctorRepo.save(newdoctor);
-    }
+        Doctor updatedDoc= doctorRepo.save(newdoctor);
+        return new ResponseEntity<>(updatedDoc,HttpStatus.OK);
+}
 
 
     // Login and Logout Functionalities..
