@@ -3,6 +3,8 @@ package com.covid.vaccination.Controller;
 import com.covid.vaccination.Entity.Center;
 import com.covid.vaccination.Implementation.centerAllocationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +16,11 @@ public class centerAllocationController {
     public centerAllocationServiceImpl cImpl1;
 
     @PostMapping("/allocateCenter")
-    public Center allocateCenter(@RequestBody Center center) {
+    public ResponseEntity<Center> allocateCenter(@RequestBody Center center) {
 
         cImpl1.saveCenter(center);
 
-        return center;
+        return new ResponseEntity<>(center, HttpStatus.OK);
     }
 
 

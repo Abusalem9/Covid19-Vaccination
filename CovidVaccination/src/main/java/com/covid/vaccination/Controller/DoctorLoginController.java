@@ -3,6 +3,8 @@ package com.covid.vaccination.Controller;
 import com.covid.vaccination.DTO.DoctorDTO;
 import com.covid.vaccination.Implementation.DoctorLoginImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,14 +14,14 @@ public class DoctorLoginController {
     private DoctorLoginImpl doctorloginImpl;
 
     @PostMapping(value = "/doctorlogin")
-    public String logInDoctor(@RequestBody DoctorDTO doctorDTO) {
-        return doctorloginImpl.logIntoAccount(doctorDTO);
+    public ResponseEntity<String> logInDoctor(@RequestBody DoctorDTO doctorDTO) {
+        return new ResponseEntity<>(doctorloginImpl.logIntoAccount(doctorDTO), HttpStatus.CHECKPOINT);
     }
 
     // for user Logout
     @PatchMapping(value = "/doctorlogout")
-    public String logOutDoctor(@RequestParam String key) {
-        return doctorloginImpl.logOutFromAccount(key);
+    public ResponseEntity<String> logOutDoctor(@RequestParam String key) {
+        return new ResponseEntity<>(doctorloginImpl.logOutFromAccount(key),HttpStatus.CHECKPOINT);
     }
 
 }
