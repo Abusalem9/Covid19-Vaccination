@@ -3,6 +3,7 @@ package com.covid.vaccination.Controller;
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class DoctorController {
     }
     //    Get All doctors
     @GetMapping("/doctors")
-    public List<Doctor> getAllDoctors(){
+    public ResponseEntity<List<Doctor>> getAllDoctors(){
         return dsi.getAllDoctors();
     }
 
@@ -44,14 +45,14 @@ public class DoctorController {
 
     // Update Doctor Details Using Key.
     @PutMapping("/updateDoctor")
-    public Doctor updateDoctor(@RequestParam String key,@RequestBody Doctor newDoctor) {
+    public ResponseEntity<Doctor> updateDoctor(@RequestParam String key,@RequestBody Doctor newDoctor) {
 
        return dsi.updateDoctorDetails(key,newDoctor);
 
     }
 
     @GetMapping("/profile")
-    public Doctor viewProfile(@RequestParam String key) {
+    public ResponseEntity<Doctor> viewProfile(@RequestParam String key) {
         return  dsi.viewProfile(key);
     }
 
