@@ -16,7 +16,6 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @JsonIgnore
     private Integer user_id;
     private String firstName;
     private String lastName;

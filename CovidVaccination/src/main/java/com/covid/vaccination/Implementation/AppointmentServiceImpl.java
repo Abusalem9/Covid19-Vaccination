@@ -2,6 +2,7 @@ package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Appointment;
 import com.covid.vaccination.Entity.VaccineStorage;
+import com.covid.vaccination.Entity.centerAddress;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.*;
@@ -35,12 +36,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public ResponseEntity<Appointment> setAppointment(Appointment appointment) {
-        VaccineStorage v=vaccineStorageRepository.findByCenterID(appointment.getCenter_id());
-        if(v.getAvailableStock()<=0){
-            throw new UserAlreadyExistWithMobileNumber("No vaccine Available at this Center");
-        }
         if (centerAddressRepository.existsById(appointment.getCenter_id())) {
-
+            VaccineStorage v=vaccineStorageRepository.findByCenterID(appointment.getCenter_id());
+            if(v.getAvailableStock()<=0){
+                throw new UserAlreadyExistWithMobileNumber("No vaccine Available at this Center");
+            }
             if (userService.getUserById(appointment.getUser_id()).getPassword().equals(appointment.getPassword())) {
                 if (dose2Repository.getDose2ByUser_id(appointment.getUser_id()) != null) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already User Has Taken Both Doses.");

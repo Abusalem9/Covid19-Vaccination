@@ -11,7 +11,6 @@ import java.util.Date;
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @JsonIgnore
     private Integer doctorId;
     private String firstName;
     private String lastName;
