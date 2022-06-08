@@ -20,6 +20,7 @@ public class DoctorDoseGeneration {
     private Integer doseGenerationId;
     private Integer doctorId;
     private Integer user_id;
+    private String d_password;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Dose1 dose1;

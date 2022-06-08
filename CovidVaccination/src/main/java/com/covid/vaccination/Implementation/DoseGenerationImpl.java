@@ -1,19 +1,12 @@
 package com.covid.vaccination.Implementation;
 
-import com.covid.vaccination.Entity.Appointment;
-import com.covid.vaccination.Entity.DoctorDoseGeneration;
-import com.covid.vaccination.Entity.Dose1;
-import com.covid.vaccination.Entity.Dose2;
-import com.covid.vaccination.Repository.AppointmentRepository;
-import com.covid.vaccination.Repository.Dose1Repository;
-import com.covid.vaccination.Repository.Dose2Repository;
-import com.covid.vaccination.Repository.DoseGenerationRepository;
+import com.covid.vaccination.Entity.*;
+import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
+import com.covid.vaccination.Repository.*;
 import com.covid.vaccination.Service.DoseGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DoseGenerationImpl implements DoseGenerationService {
@@ -28,30 +21,42 @@ public class DoseGenerationImpl implements DoseGenerationService {
     public  AppointmentServiceImpl appointmentService;
     @Autowired
     public AppointmentRepository appointmentRepository;
+    @Autowired
+    public DoctorServicesImp doctorServicesImp;
+    @Autowired
+    public DoctorRepository doctorRepository;
     
     public String generatedDose(DoctorDoseGeneration doctorDoseGeneration) {
+        Doctor d=doctorRepository.getDoctorByDoctorId(doctorDoseGeneration.getDoctorId());
+        if(d!=null){
+            if(doctorDoseGeneration.getD_password().equals(d.getPassword())){
+                Dose1 dose1 = dose1Repository.getDose1ByUser_id(doctorDoseGeneration.getUser_id());
+                Dose2 dose2 = dose2Repository.getDose2ByUser_id(doctorDoseGeneration.getUser_id());
+                Appointment appointment=appointmentRepository.findByUser_id(doctorDoseGeneration.getUser_id());
 
-        Dose1 dose1 = dose1Repository.getDose1ByUser_id(doctorDoseGeneration.getUser_id());
-        Dose2 dose2 = dose2Repository.getDose2ByUser_id(doctorDoseGeneration.getUser_id());
-        Appointment appointment=appointmentRepository.findByUser_id(doctorDoseGeneration.getUser_id());
+                if (dose1 == null && dose2 == null&&appointment!=null) {
+                    doseGenerationRepository.save(doctorDoseGeneration);
+                    appointmentRepository.delete(appointment);
+                    return "Dose 1 SuccessFully Vaccinated";
+                }
 
-        if (dose1 == null && dose2 == null&&appointment!=null) {
-            doseGenerationRepository.save(doctorDoseGeneration);
-            appointmentRepository.delete(appointment);
-            return "Dose 1 SuccessFully Vaccinated";
-        }
-
-        else if ((dose1 != null) && dose2 == null) {
-            if(doctorDoseGeneration.getDose1()==null){
-                doseGenerationRepository.save(doctorDoseGeneration);
-                return "Dose 2 Successfully Vaccinated";
-            }else {
-                return "Already Dose 1 Completed";
+                else if ((dose1 != null) && dose2 == null) {
+                    if(doctorDoseGeneration.getDose1()==null){
+                        doseGenerationRepository.save(doctorDoseGeneration);
+                        return "Dose 2 Successfully Vaccinated";
+                    }else {
+                        return "Already Dose 1 Completed";
+                    }
+                } else if(dose1!=null&&dose2!=null){
+                    return "You Are Fully Vaccinated";
+                }
+                else
+                    return "Please Book Your Slot";
             }
-        } else if(dose1!=null&&dose2!=null){
-            return "You Are Fully Vaccinated";
+            else
+                throw new UserAlreadyExistWithMobileNumber("Please Fill Correct Doctor Password");
         }
         else
-            return "Please Book Your Slot";
-    }
+            throw new UserAlreadyExistWithMobileNumber("Doctor Not Found/Exist");
+        }
 }
