@@ -6,6 +6,7 @@ import com.covid.vaccination.Implementation.AppointmentServiceImpl;
 import com.covid.vaccination.Implementation.DoseGenerationImpl;
 import com.covid.vaccination.Service.DoseGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class DoctorGeneratedDoseController {
 
     }
     @GetMapping("/getAllAppointment")
-    public List<Appointment> getAllAppointments(){
+    public ResponseEntity<List<Appointment>> getAllAppointments(){
         return appointmentService.getAllAppointment();
     }
 }

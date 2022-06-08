@@ -10,8 +10,12 @@ import com.covid.vaccination.Repository.Dose1Repository;
 import com.covid.vaccination.Repository.Dose2Repository;
 import com.covid.vaccination.Service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.xml.ws.http.HTTPException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,32 +35,36 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Dose2Repository dose2Repository;
 
     @Override
-    public Appointment setAppointment(Appointment appointment) {
+    public ResponseEntity<Appointment> setAppointment(Appointment appointment) {
         if (dose2Repository.getDose2ByUser_id(appointment.getUser_id())!=null){
-            throw new UserAlreadyExistWithMobileNumber("Already User Has Taken Both Doses.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Already User Has Taken Both Doses.");
         }
         Appointment optional=appointmentRepository.findByUser_id(appointment.getUser_id());
         if (optional==null){
-            return appointmentRepository.save(appointment);
+            Appointment result= appointmentRepository.save(appointment);
+            return new ResponseEntity<>(result,HttpStatus.OK);
         }
         else
-            throw new UserAlreadyExistWithMobileNumber("User Already Generated an Appointment Please Wait for Doctor Approval.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Already Generated an Appointment Please Wait for Doctor Approval.");
     }
 
     @Override
-    public Appointment getAppointmentById(Integer id) {
-        return appointmentRepository.findById(id).orElseThrow(() -> new UserException("User does not exist with User Id :" + id));
+    public ResponseEntity<Appointment> getAppointmentById(Integer id) {
+        Appointment result= appointmentRepository.findById(id).orElseThrow(() -> new UserException("User does not exist with User Id :" + id));
+
+       return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
-    public Appointment deleteAppointmentById(Integer id) {
-        Appointment existingUser= appointmentRepository.findById(id).orElseThrow( () -> new UserException("User does not exist with this Id :"+id) );
+    public ResponseEntity<Appointment> deleteAppointmentById(Integer id) {
+        Appointment existingUser= appointmentRepository.findById(id).orElseThrow( () -> new UserException("User does not exist with this UserId :"+id) );
         appointmentRepository.delete(existingUser);
-        return existingUser;
+        return new ResponseEntity<>(existingUser,HttpStatus.OK);
     }
 
     @Override
-    public List<Appointment> getAllAppointment() {
-        return appointmentRepository.findAll();
+    public ResponseEntity<List<Appointment>> getAllAppointment() {
+
+        return new ResponseEntity<>(appointmentRepository.findAll(),HttpStatus.OK);
     }
 }

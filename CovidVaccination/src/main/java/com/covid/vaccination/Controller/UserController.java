@@ -5,6 +5,7 @@ import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Implementation.AppointmentServiceImpl;
 import com.covid.vaccination.Implementation.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/book/slot")
-    public Appointment setAppointmentOfDose(@RequestBody Appointment appointment){
+    public ResponseEntity<Appointment> setAppointmentOfDose(@RequestBody Appointment appointment){
+
         return appointmentService.setAppointment(appointment);
     }
 
