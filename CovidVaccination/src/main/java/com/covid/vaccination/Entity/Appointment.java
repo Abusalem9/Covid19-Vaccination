@@ -21,5 +21,6 @@ public class Appointment {
     private LocalDateTime appointmentDate=LocalDateTime.now();
     @Column(unique = true,columnDefinition = "integer default 0")
     private Integer user_id;
+    private String password;
     private Integer center_id;
 }

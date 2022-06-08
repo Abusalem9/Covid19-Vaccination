@@ -15,11 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.xml.ws.http.HTTPException;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -36,16 +32,19 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public ResponseEntity<Appointment> setAppointment(Appointment appointment) {
-        if (dose2Repository.getDose2ByUser_id(appointment.getUser_id())!=null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Already User Has Taken Both Doses.");
-        }
-        Appointment optional=appointmentRepository.findByUser_id(appointment.getUser_id());
-        if (optional==null){
-            Appointment result= appointmentRepository.save(appointment);
-            return new ResponseEntity<>(result,HttpStatus.OK);
-        }
-        else
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Already Generated an Appointment Please Wait for Doctor Approval.");
+        if (userService.getUserById(appointment.getUser_id()).getPassword().equals(appointment.getPassword())) {
+            if (dose2Repository.getDose2ByUser_id(appointment.getUser_id()) != null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already User Has Taken Both Doses.");
+            }
+            Appointment optional = appointmentRepository.findByUser_id(appointment.getUser_id());
+            if (optional == null) {
+                Appointment result = appointmentRepository.save(appointment);
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            } else
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Generated an Appointment Please Wait for Doctor Approval.");
+
+        }else
+            throw new UserAlreadyExistWithMobileNumber("Please Fill Correct User Id & Password");
     }
 
     @Override
