@@ -1,6 +1,7 @@
 package com.covid.vaccination.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @ToString
 public class CurrentUserSession {
 
@@ -22,15 +23,8 @@ public class CurrentUserSession {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Integer id;
-
     private String uuid;
 
     private LocalDateTime localDateTime;
 
-    public CurrentUserSession(Integer id, String uuid, LocalDateTime localDateTime) {
-        super();
-        this.id = id;
-        this.uuid = uuid;
-        this.localDateTime = localDateTime;
-    }
 }

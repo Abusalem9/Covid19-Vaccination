@@ -4,7 +4,6 @@ import com.covid.vaccination.Entity.Appointment;
 import com.covid.vaccination.Entity.DoctorDoseGeneration;
 import com.covid.vaccination.Implementation.AppointmentServiceImpl;
 import com.covid.vaccination.Implementation.DoseGenerationImpl;
-import com.covid.vaccination.Service.DoseGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,7 +2,6 @@ package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Appointment;
 import com.covid.vaccination.Entity.VaccineStorage;
-import com.covid.vaccination.Entity.centerAddress;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.*;

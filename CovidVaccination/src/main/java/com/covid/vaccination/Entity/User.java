@@ -1,8 +1,6 @@
 package com.covid.vaccination.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,13 +17,11 @@ public class User {
     private Integer user_id;
     private String firstName;
     private String lastName;
-    @Column(unique = true)
     private String mobile;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date dob;
     private String password;
     private Gender gender;
-    @Column(unique = true)
     private String aadharNo;
     private String pinCode;
     private String city;
