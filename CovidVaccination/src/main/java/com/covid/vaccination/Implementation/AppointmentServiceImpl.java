@@ -1,10 +1,12 @@
 package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.Appointment;
+import com.covid.vaccination.Entity.Dose1;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.AppointmentRepository;
+import com.covid.vaccination.Repository.Dose1Repository;
 import com.covid.vaccination.Service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     public  UserServiceImpl userService;
+
+    @Autowired
+    public Dose1Repository dose1Repository;
     @Override
     public Appointment setAppointment(Appointment appointment) {
         userService.getUserById(appointment.getUser_id());
         Appointment optional=appointmentRepository.findByUser_id(appointment.getUser_id());
-        if (optional!=null){
+        if (optional==null){
             return appointmentRepository.save(appointment);
         }
         else

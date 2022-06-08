@@ -6,12 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface   UserRepository extends JpaRepository<User, Integer> {
-        @Query("select u from User u where u.user_id=:n")
-        User getUserById(@Param("n") Integer id);
+
+        @Query("select u from User  u where u.aadharNo=:n")
+        User getUsersByAadharNo(@Param("n")String n);
+        @Query("select u from User  u where u.mobile=:n")
+        User getUsersByMobileNo(@Param("n")String n);
+
         Optional<User> findByMobile(String mobileNo);
 
 

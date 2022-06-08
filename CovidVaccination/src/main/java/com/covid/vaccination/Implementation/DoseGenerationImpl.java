@@ -51,6 +51,5 @@ public class DoseGenerationImpl implements DoseGenerationService {
         } else {
             return "You Are Fully Vaccinated";
         }
-
     }
 }

@@ -10,10 +10,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Data
 public class VaccineStorage {
-//    private Center c;
-
     @Id
     private Long id;
     private Integer availableStock;
-
 }
