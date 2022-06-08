@@ -1,0 +1,24 @@
+Doctor Generated Dose Controller
+user:
+{
+  "doctorId": 0,
+  "dose1": {
+    "doctor_id": 0,
+    "user_id": 0
+  },
+  "dose2": {
+    "doctor_id": 0,
+    "user_id": 0
+  },
+  "user_id": 0
+}
+-----------------------------
+POST
+/Doctor/Dose/CreateDose
+
+
+
+Response body:
+
+You Are Fully Vaccinated
+--------------------------------
