@@ -31,8 +31,8 @@ public class UserController {
     }
 
     @PutMapping("/updateUser")
-    public User updateUserByUsingId(@RequestBody User user,@RequestParam String key){
-        return usi.updateUser(user,key);
+    public User updateUserByUsingId(@RequestBody User user,@RequestParam String password){
+        return usi.updateUser(user,password);
     }
 
     @PostMapping("/book/slot")

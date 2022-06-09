@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
             UserLogin u=userLoginRepository.getUserLoginByMobile(user2.get().getMobile());
             if(u!=null){
                 if(u.getPassword().equals(password)){
-                    User updated= userRepository.save(user2.get());
+                    User updated= userRepository.save(user);
                     userLoginRepository.delete(u);
                     return updated;
                 }
