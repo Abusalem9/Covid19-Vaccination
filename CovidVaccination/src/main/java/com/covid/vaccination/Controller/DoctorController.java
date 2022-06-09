@@ -1,7 +1,11 @@
 package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.Doctor;
+import com.covid.vaccination.Entity.DoctorLogin;
+import com.covid.vaccination.Entity.DoctorLogin;
+import com.covid.vaccination.Implementation.DoctorLoginServiceImpl;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
+import com.covid.vaccination.Implementation.DoctorLoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +22,7 @@ public class DoctorController {
 
     //  Add doctors
     @PostMapping("/addDoctor")
-    public String createUser(@RequestBody Doctor doctor){
+    public String createDoctor(@RequestBody Doctor doctor){
         dsi.addDoctor(doctor);
         return "Doctor Has Been Added Successfully.";
     }
@@ -30,16 +34,27 @@ public class DoctorController {
         return dsi.getDoctor(id);
 
     }
+    @Autowired
+    public DoctorLoginServiceImpl doctorLoginService;
+    @PostMapping("/Doctor/Login")
+    public DoctorLogin userLogin(@RequestBody DoctorLogin userLogin) {
+        return doctorLoginService.login(userLogin);
+    }
+
+    @PostMapping("/Doctor/Logout")
+    public String DoctorLogOut(@RequestBody DoctorLogin userLogin) {
+        return doctorLoginService.logOut(userLogin);
+    }
     //    Get All doctors
 //    @GetMapping("/doctors")
 //    public ResponseEntity<List<Doctor>> getAllDoctors(){
 //        return dsi.getAllDoctors();
 //    }
 
-//    // Delete User By Id
-//    @DeleteMapping("/deleteUser/{id}")
-//    public User deleteUserUsingId(@PathVariable("id") Integer id){
-//        return usi.deleteUserById(id);
+//    // Delete Doctor By Id
+//    @DeleteMapping("/deleteDoctor/{id}")
+//    public Doctor deleteDoctorUsingId(@PathVariable("id") Integer id){
+//        return usi.deleteDoctorById(id);
 //    }
 
 
@@ -57,9 +72,9 @@ public class DoctorController {
     }
 
 
-//    @PostMapping("/vaccinateUser")
-//    public String vaccinateUser(@RequestBody Dose dose){
-//        return dsi.vaccinateUser(dose);
+//    @PostMapping("/vaccinateDoctor")
+//    public String vaccinateDoctor(@RequestBody Dose dose){
+//        return dsi.vaccinateDoctor(dose);
 //    }
 
 
