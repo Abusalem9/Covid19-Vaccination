@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
-     Optional<Doctor> findByDoctorId(Integer doctorId);
+     Doctor findByDoctorId(Integer doctorId);
      Optional<Doctor> findByMobile(String mobileNo);
      @Query("select  d from  Doctor d where  d.doctorId=:n")
      Doctor getDoctorByDoctorId(@Param("n")Integer id);

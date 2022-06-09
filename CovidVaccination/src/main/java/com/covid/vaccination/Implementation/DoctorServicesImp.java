@@ -41,11 +41,11 @@ public class DoctorServicesImp implements DoctorServices {
     @Override
     public Doctor getDoctor(Integer did) {
 
-        Optional<Doctor> doctorOpt = doctorRepo.findByDoctorId(did);
-        if(!doctorOpt.isPresent()){
+        Doctor doctorOpt = doctorRepo.findByDoctorId(did);
+        if(doctorOpt==null){
             throw new DoctorException("Doctor not exist with this ID "+did);
         }
-        return doctorOpt.get();
+        return doctorOpt;
     }
 
     @Override
@@ -65,12 +65,12 @@ public class DoctorServicesImp implements DoctorServices {
 
     @Override
     public ResponseEntity<Doctor> updateDoctorDetails(Doctor doctor, String password) throws Exception {
-        Optional<Doctor> doctor2 = doctorRepo.findByDoctorId(doctor.getDoctorId());
-        if(doctor2.isPresent()){
-            DoctorLogin u= doctorLoginRepository.getDoctorLoginByMobile(doctor2.get().getMobile());
+        Doctor doctor2 = doctorRepo.findByDoctorId(doctor.getDoctorId());
+        if(doctor2!=null){
+            DoctorLogin u= doctorLoginRepository.getDoctorLoginByMobile(doctor2.getMobile());
             if(u!=null){
                 if(u.getPassword().equals(password)){
-                    Doctor updated= doctorRepo.save(doctor2.get());
+                    Doctor updated= doctorRepo.save(doctor);
                     doctorLoginRepository.delete(u);
                     return new ResponseEntity<>(updated,HttpStatus.OK);
                 }
