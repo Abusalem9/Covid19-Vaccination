@@ -16,15 +16,8 @@ public interface DoctorServices {
 
     ResponseEntity<List<Doctor>> getAllDoctors();
 
+    ResponseEntity<Doctor> updateDoctorDetails(Doctor newdoctor) throws Exception;
 
-    ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) throws Exception;
-
-    // Doctor  Login and logout services
-
-    String logoutAccount(String key);
-
-
-    // new functionalities
 
     ResponseEntity<Doctor> viewProfile( String Sessionkey );
 

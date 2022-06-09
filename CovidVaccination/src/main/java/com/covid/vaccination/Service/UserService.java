@@ -15,5 +15,5 @@ public interface UserService {
 
     User deleteUserById(Integer id) throws UserException;
 
-    User updateUser(User user, String key) throws UserException;
+    User updateUser(User user, String password) throws UserException;
 }

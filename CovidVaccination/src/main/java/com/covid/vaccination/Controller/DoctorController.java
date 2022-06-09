@@ -20,20 +20,12 @@ public class DoctorController {
 
     private DoctorServicesImp dsi;
 
-    //  Add doctors
     @PostMapping("/addDoctor")
     public String createDoctor(@RequestBody Doctor doctor){
         dsi.addDoctor(doctor);
         return "Doctor Has Been Added Successfully.";
     }
 
-    //    get doctors using doctorId;
-    @GetMapping("/doctor/{did}")
-    public Doctor getDoctorById(@PathVariable("did") Integer id) {
-
-        return dsi.getDoctor(id);
-
-    }
     @Autowired
     public DoctorLoginServiceImpl doctorLoginService;
     @PostMapping("/Doctor/Login")
@@ -45,38 +37,10 @@ public class DoctorController {
     public String DoctorLogOut(@RequestBody DoctorLogin userLogin) {
         return doctorLoginService.logOut(userLogin);
     }
-    //    Get All doctors
-//    @GetMapping("/doctors")
-//    public ResponseEntity<List<Doctor>> getAllDoctors(){
-//        return dsi.getAllDoctors();
-//    }
-
-//    // Delete Doctor By Id
-//    @DeleteMapping("/deleteDoctor/{id}")
-//    public Doctor deleteDoctorUsingId(@PathVariable("id") Integer id){
-//        return usi.deleteDoctorById(id);
-//    }
-
-
-    // Update Doctor Details Using Key.
-//    @PutMapping("/updateDoctor")
-//    public ResponseEntity<Doctor> updateDoctor(@RequestParam String key,@RequestBody Doctor newDoctor) {
-//
-//       return dsi.updateDoctorDetails(key,newDoctor);
-//
-//    }
-
     @GetMapping("/profile")
     public ResponseEntity<Doctor> viewProfile(@RequestParam String key) {
         return  dsi.viewProfile(key);
     }
-
-
-//    @PostMapping("/vaccinateDoctor")
-//    public String vaccinateDoctor(@RequestBody Dose dose){
-//        return dsi.vaccinateDoctor(dose);
-//    }
-
 
 }
 
