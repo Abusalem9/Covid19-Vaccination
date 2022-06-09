@@ -14,8 +14,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     public UserRepository userRepository;
-    @Autowired
-    private GetCurrentUserLoginSessionDetailsImpl getCurrentLoginUser;
 
     @Override
     public void saveUser(User user) {
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user, String key) throws UserException {
-        User user2 = getCurrentLoginUser.getCurrentCustomer(key);
+        User user2 = new User();
 
         if (user2 == null) {
             throw new UserException("No user found. Please try login first.");

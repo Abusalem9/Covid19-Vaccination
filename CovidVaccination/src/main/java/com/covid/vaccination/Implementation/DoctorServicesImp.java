@@ -1,13 +1,10 @@
 package com.covid.vaccination.Implementation;
 
-import com.covid.vaccination.DTO.DoctorDTO;
-import com.covid.vaccination.Entity.CurrentDoctorSession;
+
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Exception.DoctorException;
-import com.covid.vaccination.Exception.InvalidMobileException;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.DoctorRepository;
-import com.covid.vaccination.Repository.DoctorSessionRepository;
 import com.covid.vaccination.Service.DoctorServices;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,6 @@ public class DoctorServicesImp implements DoctorServices {
     @Autowired
     public DoctorRepository doctorRepo;
 
-    private DoctorSessionRepository doctorSessionRepo;
 
     @Override
     public ResponseEntity<Doctor> addDoctor(Doctor doctor) {
@@ -57,96 +53,111 @@ public class DoctorServicesImp implements DoctorServices {
         return new ResponseEntity<>(doctorRepo.findAll(),HttpStatus.OK);
     }
 
-@Override
-    public ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) {
-
-        if (key.equals("1111")){
-           return new ResponseEntity<>(doctorRepo.save(newdoctor), HttpStatus.OK);
-        }
-
-        Optional<CurrentDoctorSession> sessionOpt = doctorSessionRepo.findByUuid(key);
-
-        if (!sessionOpt.isPresent()) {
-            throw new DoctorException("Can't update, Please try to login first.");
-        }
-        CurrentDoctorSession session = sessionOpt.get();
-
-        Optional<Doctor> doctorOpt = doctorRepo.findById(session.getId());
-
-       Integer updaterId = doctorOpt.get().getDoctorId();
-
-        if(!Objects.equals(updaterId, newdoctor.getDoctorId())){
-            throw new DoctorException("You are not supposed to update others Details..");
-        }
-
-        Doctor updatedDoc= doctorRepo.save(newdoctor);
-        return new ResponseEntity<>(updatedDoc,HttpStatus.OK);
-}
-
-
-    // Login and Logout Functionalities..
-    // (To take charge of a particular center)
     @Override
-    public String loginAccount(DoctorDTO dto) {
-
-        Optional<Doctor> doctorOpt = doctorRepo.findByMobile(dto.getMobile());
-
-        if (dto.getMobile().length() != 10 || !doctorOpt.isPresent()) {
-            throw new InvalidMobileException("Please Enter Valid Mobile No");
-        }
-
-        Doctor currDoctor = doctorOpt.get();
-        Integer did = currDoctor.getDoctorId();
-
-        if (!currDoctor.getPassword().equals(dto.getPassword())) {
-            throw new DoctorException("Please enter a valid password");
-        }
-
-        Optional<CurrentDoctorSession> currentDoctorSession = doctorSessionRepo.findById(did);
-
-        if (currentDoctorSession.isPresent()) {
-            throw new DoctorException("You are already working to a center..");
-        }
-
-        String key = RandomString.make(7);
-
-        CurrentDoctorSession session = new CurrentDoctorSession(currDoctor.getDoctorId(), key, LocalDateTime.now());
-
-        doctorSessionRepo.save(session);
-
-        return doctorSessionRepo.toString();
-
+    public ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) throws Exception {
+        return null;
     }
 
     @Override
     public String logoutAccount(String key) {
-
-        Optional<CurrentDoctorSession> session = doctorSessionRepo.findByUuid(key);
-
-        if (!session.isPresent()) {
-            throw new DoctorException("Invalid key OR Doctor is present in the center");
-        }
-        doctorSessionRepo.delete(session.get());
-
-        return "Doctor is leaving from the center..";
+        return null;
     }
 
-
-    // View Profile If logedIn
     @Override
-    public ResponseEntity<Doctor> viewProfile(String sessionkey) {
-
-        Optional<CurrentDoctorSession> sessionOpt = doctorSessionRepo.findByUuid(sessionkey);
-
-        if (!sessionOpt.isPresent()) {
-            throw new DoctorException("You are not loggedIn");
-        }
-        CurrentDoctorSession session = sessionOpt.get();
-
-        Optional<Doctor> doctorOpt = doctorRepo.findById(session.getId());
-
-        return new ResponseEntity<>(doctorOpt.get(),HttpStatus.OK);
-
+    public ResponseEntity<Doctor> viewProfile(String Sessionkey) {
+        return null;
     }
+
+//@Override
+//    public ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) {
+//
+//        if (key.equals("1111")){
+//           return new ResponseEntity<>(doctorRepo.save(newdoctor), HttpStatus.OK);
+//        }
+//
+//        Optional<CurrentDoctorSession> sessionOpt = doctorSessionRepo.findByUuid(key);
+//
+//        if (!sessionOpt.isPresent()) {
+//            throw new DoctorException("Can't update, Please try to login first.");
+//        }
+//        CurrentDoctorSession session = sessionOpt.get();
+//
+//        Optional<Doctor> doctorOpt = doctorRepo.findById(session.getId());
+//
+//       Integer updaterId = doctorOpt.get().getDoctorId();
+//
+//        if(!Objects.equals(updaterId, newdoctor.getDoctorId())){
+//            throw new DoctorException("You are not supposed to update others Details..");
+//        }
+//
+//        Doctor updatedDoc= doctorRepo.save(newdoctor);
+//        return new ResponseEntity<>(updatedDoc,HttpStatus.OK);
+//}
+//
+//
+//    // Login and Logout Functionalities..
+//    // (To take charge of a particular center)
+//    @Override
+//    public String loginAccount(DoctorDTO dto) {
+//
+//        Optional<Doctor> doctorOpt = doctorRepo.findByMobile(dto.getMobile());
+//
+//        if (dto.getMobile().length() != 10 || !doctorOpt.isPresent()) {
+//            throw new InvalidMobileException("Please Enter Valid Mobile No");
+//        }
+//
+//        Doctor currDoctor = doctorOpt.get();
+//        Integer did = currDoctor.getDoctorId();
+//
+//        if (!currDoctor.getPassword().equals(dto.getPassword())) {
+//            throw new DoctorException("Please enter a valid password");
+//        }
+//
+//        Optional<CurrentDoctorSession> currentDoctorSession = doctorSessionRepo.findById(did);
+//
+//        if (currentDoctorSession.isPresent()) {
+//            throw new DoctorException("You are already working to a center..");
+//        }
+//
+//        String key = RandomString.make(7);
+//
+//        CurrentDoctorSession session = new CurrentDoctorSession(currDoctor.getDoctorId(), key, LocalDateTime.now());
+//
+//        doctorSessionRepo.save(session);
+//
+//        return doctorSessionRepo.toString();
+//
+//    }
+//
+//    @Override
+//    public String logoutAccount(String key) {
+//
+//        Optional<CurrentDoctorSession> session = doctorSessionRepo.findByUuid(key);
+//
+//        if (!session.isPresent()) {
+//            throw new DoctorException("Invalid key OR Doctor is present in the center");
+//        }
+//        doctorSessionRepo.delete(session.get());
+//
+//        return "Doctor is leaving from the center..";
+//    }
+//
+//
+//    // View Profile If logedIn
+//    @Override
+//    public ResponseEntity<Doctor> viewProfile(String sessionkey) {
+//
+//        Optional<CurrentDoctorSession> sessionOpt = doctorSessionRepo.findByUuid(sessionkey);
+//
+//        if (!sessionOpt.isPresent()) {
+//            throw new DoctorException("You are not loggedIn");
+//        }
+//        CurrentDoctorSession session = sessionOpt.get();
+//
+//        Optional<Doctor> doctorOpt = doctorRepo.findById(session.getId());
+//
+//        return new ResponseEntity<>(doctorOpt.get(),HttpStatus.OK);
+//
+//    }
 
 }

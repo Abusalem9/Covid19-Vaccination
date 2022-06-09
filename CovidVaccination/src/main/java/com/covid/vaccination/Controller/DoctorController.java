@@ -31,10 +31,10 @@ public class DoctorController {
 
     }
     //    Get All doctors
-    @GetMapping("/doctors")
-    public ResponseEntity<List<Doctor>> getAllDoctors(){
-        return dsi.getAllDoctors();
-    }
+//    @GetMapping("/doctors")
+//    public ResponseEntity<List<Doctor>> getAllDoctors(){
+//        return dsi.getAllDoctors();
+//    }
 
 //    // Delete User By Id
 //    @DeleteMapping("/deleteUser/{id}")
@@ -44,12 +44,12 @@ public class DoctorController {
 
 
     // Update Doctor Details Using Key.
-    @PutMapping("/updateDoctor")
-    public ResponseEntity<Doctor> updateDoctor(@RequestParam String key,@RequestBody Doctor newDoctor) {
-
-       return dsi.updateDoctorDetails(key,newDoctor);
-
-    }
+//    @PutMapping("/updateDoctor")
+//    public ResponseEntity<Doctor> updateDoctor(@RequestParam String key,@RequestBody Doctor newDoctor) {
+//
+//       return dsi.updateDoctorDetails(key,newDoctor);
+//
+//    }
 
     @GetMapping("/profile")
     public ResponseEntity<Doctor> viewProfile(@RequestParam String key) {

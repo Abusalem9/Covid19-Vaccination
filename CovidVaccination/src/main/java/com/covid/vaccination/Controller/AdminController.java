@@ -80,11 +80,11 @@ public class AdminController {
     public User updateUserByUsingId(@RequestBody User user,@RequestParam String key){
         return usi.updateUser(user,key);
     }
-    @PutMapping("/Admin/updateDoctor")
-    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) {
-
-        return doctorServicesImp.updateDoctorDetails("1111",doctor);
-    }
+//    @PutMapping("/Admin/updateDoctor")
+//    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) {
+//
+//        return doctorServicesImp.updateDoctorDetails("1111",doctor);
+//    }
 
     @DeleteMapping("/Admin/deleteUser/{id}")
     public User deleteUserByUserId(@PathVariable("id") Integer id){
