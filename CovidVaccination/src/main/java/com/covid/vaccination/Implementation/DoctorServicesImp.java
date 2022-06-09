@@ -2,8 +2,13 @@ package com.covid.vaccination.Implementation;
 
 
 import com.covid.vaccination.Entity.Doctor;
+import com.covid.vaccination.Entity.DoctorLogin;
+import com.covid.vaccination.Entity.User;
+import com.covid.vaccination.Entity.UserLogin;
 import com.covid.vaccination.Exception.DoctorException;
+import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
+import com.covid.vaccination.Repository.DoctorLoginRepository;
 import com.covid.vaccination.Repository.DoctorRepository;
 import com.covid.vaccination.Service.DoctorServices;
 import net.bytebuddy.utility.RandomString;
@@ -22,6 +27,9 @@ public class DoctorServicesImp implements DoctorServices {
 
     @Autowired
     public DoctorRepository doctorRepo;
+
+    @Autowired
+    DoctorLoginRepository doctorLoginRepository;
 
 
     @Override
@@ -53,15 +61,39 @@ public class DoctorServicesImp implements DoctorServices {
         return new ResponseEntity<>(doctorRepo.findAll(),HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) throws Exception {
-        return null;
-    }
+
 
     @Override
-    public String logoutAccount(String key) {
-        return null;
+    public ResponseEntity<Doctor> updateDoctorDetails(Doctor doctor, String password) throws Exception {
+        Optional<Doctor> doctor2 = doctorRepo.findByDoctorId(doctor.getDoctorId());
+        if(doctor2.isPresent()){
+            DoctorLogin u= doctorLoginRepository.getDoctorLoginByMobile(doctor2.get().getMobile());
+            if(u!=null){
+                if(u.getPassword().equals(password)){
+                    Doctor updated= doctorRepo.save(doctor2.get());
+                    doctorLoginRepository.delete(u);
+                    return new ResponseEntity<>(updated,HttpStatus.OK);
+                }
+                else
+                    throw new UserAlreadyExistWithMobileNumber("Please fill Correct password");
+            }
+            else
+                throw new UserAlreadyExistWithMobileNumber("Please Login First.");
+        }
+        else
+            throw new UserAlreadyExistWithMobileNumber("Please Check Doctor Id");
     }
+
+
+//    @Override
+//    public ResponseEntity<Doctor> updateDoctorDetails(String key, Doctor newdoctor) throws Exception {
+//        return null;
+//    }
+//
+//    @Override
+//    public String logoutAccount(String key) {
+//        return null;
+//    }
 
     @Override
     public ResponseEntity<Doctor> viewProfile(String Sessionkey) {

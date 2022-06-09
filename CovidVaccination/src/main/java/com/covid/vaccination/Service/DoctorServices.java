@@ -16,7 +16,7 @@ public interface DoctorServices {
 
     ResponseEntity<List<Doctor>> getAllDoctors();
 
-    ResponseEntity<Doctor> updateDoctorDetails(Doctor newdoctor) throws Exception;
+    ResponseEntity<Doctor> updateDoctorDetails(Doctor doctor,String password) throws Exception;
 
 
     ResponseEntity<Doctor> viewProfile( String Sessionkey );

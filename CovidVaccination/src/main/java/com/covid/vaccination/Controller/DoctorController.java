@@ -2,15 +2,11 @@ package com.covid.vaccination.Controller;
 
 import com.covid.vaccination.Entity.Doctor;
 import com.covid.vaccination.Entity.DoctorLogin;
-import com.covid.vaccination.Entity.DoctorLogin;
 import com.covid.vaccination.Implementation.DoctorLoginServiceImpl;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
-import com.covid.vaccination.Implementation.DoctorLoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -19,6 +15,8 @@ public class DoctorController {
     @Autowired
 
     private DoctorServicesImp dsi;
+    
+   
 
     @PostMapping("/addDoctor")
     public String createDoctor(@RequestBody Doctor doctor){
@@ -40,6 +38,11 @@ public class DoctorController {
     @GetMapping("/profile")
     public ResponseEntity<Doctor> viewProfile(@RequestParam String key) {
         return  dsi.viewProfile(key);
+    }
+
+    @PutMapping("/updateDoctor")
+    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor, @RequestParam String password) throws Exception {
+        return dsi.updateDoctorDetails(doctor,password);
     }
 
 }
