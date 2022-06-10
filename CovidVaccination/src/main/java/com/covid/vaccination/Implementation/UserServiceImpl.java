@@ -23,8 +23,13 @@ public class UserServiceImpl implements UserService {
     public UserLoginRepository userLoginRepository;
 
     @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User saveUser(User user) {
+        Optional<User> newUser=userRepository.findByMobile(user.getMobile());
+        User aadhar=userRepository.getUsersByAadharNo(user.getAadharNo());
+        if(newUser.isPresent()||aadhar!=null){
+            throw new UserAlreadyExistWithMobileNumber("User Has Been Already Registered With This Mobile Number Or Aadhar Number.");
+        }
+        return userRepository.save(user);
     }
 
     @Override
@@ -46,7 +51,6 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(existingUser);
         return existingUser;
     }
-
 
     @Override
     public User updateUser(User user, String password) throws UserException {

@@ -1,3 +1,13 @@
+User Create -> User Login -> Appointment Book -> Doctor Create -> Dose 1 Generation -> Return To Appoint ->
+->Dose 2 Generation -> Both Dose Done. -> if Appointment Book -> Return Already Dose Done;
+Admin Controller
+GetAll Dose Completed
+GetAll Dose1 Completed
+GetAll Center
+VaccineStorage get
+
+
+
 GET:
 
 getUserById : 3

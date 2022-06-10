@@ -1,6 +1,7 @@
 package com.covid.vaccination.Implementation;
 
 import com.covid.vaccination.Entity.VaccineStorage;
+import com.covid.vaccination.Entity.centerAddress;
 import com.covid.vaccination.Exception.UserAlreadyExistWithMobileNumber;
 import com.covid.vaccination.Exception.UserException;
 import com.covid.vaccination.Repository.CenterAddressRepository;
@@ -9,6 +10,8 @@ import com.covid.vaccination.Service.VaccineStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class VaccineStorageServiceImpl implements VaccineStorageService {
 
@@ -16,15 +19,16 @@ public class VaccineStorageServiceImpl implements VaccineStorageService {
     private VaccineStorageRepository vaccineStorageRepository;
 
     @Autowired
-    private CenterAddressRepository centerAddressRepository;
-
+    public CenterAddressRepository centerAddressRepository;
+    @Autowired
+    public CenterCreationServiceImpl centerCreationService;
     @Override
     public VaccineStorage save(VaccineStorage vaccineStorage) {
-
-        if (centerAddressRepository.existsById(vaccineStorage.getCenterID())) {
-            vaccineStorageRepository.save(vaccineStorage);
-            return vaccineStorage;
-        } else throw new UserException(" Kindly Enter correct Center ID");
+        Optional<centerAddress> c=centerAddressRepository.findById(vaccineStorage.getCenterID());
+        if (c.isPresent()) {
+            return vaccineStorageRepository.save(vaccineStorage);
+        } else
+            throw new UserException(" Kindly Enter correct Center ID");
     }
 
     @Override

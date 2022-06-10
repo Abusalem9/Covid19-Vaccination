@@ -25,9 +25,8 @@ public class UserController {
     public AppointmentServiceImpl appointmentService;
 //    Create User
     @PostMapping("/createUser")
-    public String createUser(@RequestBody User user){
-        usi.saveUser(user);
-        return "User Has Been Added Into DataBase.";
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        return new ResponseEntity<>(usi.saveUser(user),HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/updateUser")

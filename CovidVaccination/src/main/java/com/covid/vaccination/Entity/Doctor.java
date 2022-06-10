@@ -2,6 +2,8 @@ package com.covid.vaccination.Entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+
 @Entity
 @Data
 public class Doctor {
@@ -14,5 +16,6 @@ public class Doctor {
     private String mobile;
     private String password;
     private String gender;
+    @Email(message = "Please Enter Correct Email Id.")
     private String email;
 }

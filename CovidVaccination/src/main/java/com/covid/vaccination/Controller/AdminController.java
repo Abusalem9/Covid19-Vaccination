@@ -97,11 +97,11 @@ public class AdminController {
 
         return doctorServicesImp.deleteDoctorById(id);
     }
-
-    @PostMapping("/Admin/AddingVaccinTocenter")
-    public String AddingVaccinTocenter(@RequestBody VaccineStorage vaccineStorage) {
-        vaccineStorageRepository.save(vaccineStorage);
-        return "Vaccine Has Been Added Into center.";
+    @Autowired
+    public VaccineStorageServiceImpl vaccineStorageService;
+    @PostMapping("/Admin/AddingVaccineToCenter")
+    public VaccineStorage AddingVaccineToCenter(@RequestBody VaccineStorage vaccineStorage) {
+        return vaccineStorageService.save(vaccineStorage);
     }
     @Autowired
     public CenterCreationServiceImpl centerCreationService;
@@ -149,5 +149,14 @@ public class AdminController {
     public centerAddress updateCenter(@RequestBody centerAddress center) {
         centerCreationService.saveCenterAddress(center);
         return center;
+    }
+
+    @GetMapping ("/Admin/GetStorageCenterById")
+    public VaccineStorage getVaccineStorageByCenterId(@RequestParam Integer id){
+        return vaccineStorageRepository.findByCenterID(id);
+    }
+    @GetMapping("/Admin/GetAllCenterStorage")
+    public List<VaccineStorage> getAllCenterVaccineStorage(){
+        return vaccineStorageRepository.findAll();
     }
 }

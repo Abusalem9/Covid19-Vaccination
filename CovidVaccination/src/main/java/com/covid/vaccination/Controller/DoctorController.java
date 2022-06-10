@@ -19,9 +19,8 @@ public class DoctorController {
    
 
     @PostMapping("/addDoctor")
-    public String createDoctor(@RequestBody Doctor doctor){
-        dsi.addDoctor(doctor);
-        return "Doctor Has Been Added Successfully.";
+    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor){
+        return dsi.addDoctor(doctor);
     }
 
     @Autowired

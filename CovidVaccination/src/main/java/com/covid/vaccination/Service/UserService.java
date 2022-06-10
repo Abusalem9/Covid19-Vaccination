@@ -6,7 +6,7 @@ import com.covid.vaccination.Exception.UserException;
 import java.util.List;
 
 public interface UserService {
-    void saveUser(User user);
+    User saveUser(User user);
 
     User getUserById(Integer id) throws UserException;
 
