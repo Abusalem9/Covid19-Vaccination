@@ -6,7 +6,7 @@ project. Which is generating APIs.<p/>
 
 <p dir="auto">After running this program in spring boot we have to hit this url to see all the API's in swagger
   <br/>
-<a href="http://localhost:8089/swagger-ui.html#/" rel="nofollow">http://localhost:8080/swagger-ui.html#/</a></p>
+<a href="http://localhost:8089/swagger-ui.html#/" rel="nofollow">http://localhost:8089/swagger-ui.html#/</a></p>
 <p dir="auto">COVID-19 VACCINATION APP | It's a online Application where you can get appointment for vaccination at a perticular center and  doctor can give vaccinatin after authentication. Java, Spring Boot, MySQL, used to generate different end points. Features:</p>
 <ul dir="auto">
   
