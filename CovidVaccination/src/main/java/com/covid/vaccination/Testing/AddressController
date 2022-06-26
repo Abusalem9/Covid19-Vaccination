@@ -1,0 +1,32 @@
+User Create -> User Login -> Appointment Book -> Doctor Create -> Dose 1 Generation -> Return To Appoint ->
+->Dose 2 Generation -> Both Dose Done. -> if Appointment Book -> Return Already Dose Done;
+Admin Controller
+GetAll Dose Completed
+GetAll Dose1 Completed
+GetAll Center
+VaccineStorage get
+
+
+
+GET:
+
+getUserById : 3
+Response body
+{
+  "timestamp": "2022-06-07T18:38:43.3089888",
+  "message": "Address does not exist with this Id :3",
+  "details": "uri=/Address/3"
+}
+------------------------------------------------
+getUserById : 1
+Response body
+Download
+{
+  "address_id": 1,
+  "city": "Sangli",
+  "state": "MH",
+  "pinCode": "416404"
+}
+-----------------------------------------------
+
+

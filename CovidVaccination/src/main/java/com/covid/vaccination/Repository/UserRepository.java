@@ -1,6 +1,5 @@
 package com.covid.vaccination.Repository;
 
-import com.covid.vaccination.DTO.BasicUserDetails;
 import com.covid.vaccination.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,9 +11,16 @@ import java.util.Optional;
 
 @Repository
 public interface   UserRepository extends JpaRepository<User, Integer> {
-        @Query("select u from User u where u.user_id=:n")
-        User getUserById(@Param("n") Integer id);
-        @Query("select u.user_id,u.firstName,u.firstName,u.mobile,u.dob,u.gender from User u")
-        List<BasicUserDetails> getAllUser();
+
+        @Query("select u from User  u where u.aadharNo=:n")
+        User getUsersByAadharNo(@Param("n")String n);
+        @Query("select u from User  u where u.mobile=:n")
+        User getUsersByMobileNo(@Param("n")String n);
+
+        @Query("select u from User u,Dose2 d where u.user_id=d.user_id ")
+        List<User> getAllBothDoseCompleted();
+
         Optional<User> findByMobile(String mobileNo);
+
+
 }

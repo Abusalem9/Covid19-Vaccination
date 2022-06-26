@@ -1,17 +1,26 @@
 package com.covid.vaccination.Service;
 
 import com.covid.vaccination.Entity.Doctor;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+
 public interface DoctorServices {
 
-    void addDoctor(Doctor doctor);
+    ResponseEntity<Doctor> addDoctor(Doctor doctor);
 
-     Doctor getDoctor(Integer did);
+    Doctor getDoctor(Integer did);
 
-    void deleteDoctorById(Integer did);
+    ResponseEntity<Doctor> deleteDoctorById(Integer did);
 
-    List<Doctor> getAllDoctors();
+    ResponseEntity<List<Doctor>> getAllDoctors();
+
+    ResponseEntity<Doctor> updateDoctorDetails(Doctor doctor,String password) throws Exception;
+
+
+    ResponseEntity<Doctor> viewProfile( String Sessionkey );
+
+
 
 }

@@ -1,57 +1,50 @@
-//package com.covid.vaccination.Controller;
-//
-//import com.covid.vaccination.Entity.Doctor;
-//import com.covid.vaccination.Service.DoctorServicesImp;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//
+package com.covid.vaccination.Controller;
+
+import com.covid.vaccination.Entity.Doctor;
+import com.covid.vaccination.Entity.DoctorLogin;
+import com.covid.vaccination.Implementation.DoctorLoginServiceImpl;
+import com.covid.vaccination.Implementation.DoctorServicesImp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
-//// this Controller class is not able to controlled by me
-//@RestController
-//public class DoctorController {
-//
-//    @Autowired
-//    public final DoctorServicesImp dsi;
-//
-//        public DoctorController(DoctorServicesImp dsi) {
-//            this.dsi = dsi;
-//        }
-//
-//
-//        //    Create User
-//        @PostMapping("/addDoctor")
-//        public String createUser(@RequestBody Doctor doctor){
-//            dsi.addDoctor(doctor);
-//            return "Doctor Has Been Added Successfully.";
-//        }
-//
-//    //    get User Using User_id
-//    @GetMapping("/Doctor/{did}")
-//    public Doctor getUserById(@PathVariable("did") Integer id) {
-//
-//        return dsi.getDoctor(id);
-//
-//    }
-//////    Get All Users
-////
-////    @GetMapping("/Users")
-////    public List<User> getAllUserFromDB(){
-////        return usi.getAllUsers();
-////    }
-////    // Delete User By Id
-////    @DeleteMapping("/deleteUser/{id}")
-////    public User deleteUserUsingId(@PathVariable("id") Integer id){
-////        return usi.deleteUserById(id);
-////    }
-////    // Update User Using Key.
-////    @PutMapping("/updateUser")
-////    public User updateUserByUsingId(@RequestBody User user,@RequestParam String key) {
-////        return usi.updateUser(user, key);
-////
-////    }
-//
-//    }
-//
-//
-//}
+@RestController
+public class DoctorController {
+
+    @Autowired
+
+    private DoctorServicesImp dsi;
+    
+   
+
+    @PostMapping("/addDoctor")
+    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor){
+        return dsi.addDoctor(doctor);
+    }
+
+    @Autowired
+    public DoctorLoginServiceImpl doctorLoginService;
+    @PostMapping("/Doctor/Login")
+    public DoctorLogin userLogin(@RequestBody DoctorLogin userLogin) {
+        return doctorLoginService.login(userLogin);
+    }
+
+    @PostMapping("/Doctor/Logout")
+    public String DoctorLogOut(@RequestBody DoctorLogin userLogin) {
+        return doctorLoginService.logOut(userLogin);
+    }
+    @GetMapping("/profile")
+    public ResponseEntity<Doctor> viewProfile(@RequestParam String key) {
+        return  dsi.viewProfile(key);
+    }
+
+    @PutMapping("/updateDoctor")
+    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor, @RequestParam String password) throws Exception {
+        return dsi.updateDoctorDetails(doctor,password);
+    }
+
+}
+
+
+

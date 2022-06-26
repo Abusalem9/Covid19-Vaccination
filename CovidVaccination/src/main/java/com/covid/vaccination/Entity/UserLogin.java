@@ -9,11 +9,10 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class centerAddress {
+public class UserLogin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer centerID;
-    private String city;
-    private String state;
-    private String pinCode;
+    private Integer loginRef;
+    private String mobile;
+    private String password;
 }
