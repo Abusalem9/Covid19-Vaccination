@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class DoctorController {
 
     @Autowired
-
     private DoctorServicesImp dsi;
-    
-   
-
     @PostMapping("/addDoctor")
     public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor){
         return dsi.addDoctor(doctor);
