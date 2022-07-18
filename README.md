@@ -1,6 +1,6 @@
 # REST API for an Online Cab Booking Application
 
-* We have developed this REST API for an Online Cab Booking application. This API performs all the fundamental CRUD operations of any Online Cab Booking platform with user validation at every step.
+* We have developed this REST API for an Covid-19 Vaccination. This API performs all the fundamental CRUD operations of any Online Cab Booking platform with user validation at every step.
 * This project is developed by team of 5 Back-end Developers during project week in Masai School. 
 
 ## Tech Stack
@@ -15,41 +15,40 @@
 ## Modules
 
 * Login, Logout Module
-* Driver Module
-* Customer Module
+* Doctor Module
+* User Module
 * Admin Module
-* TripBooking Module
+* Dose Generation Module
 
 ## Features
 
-* Customer, Driver and Admin authentication & validation with session uuid having.
+* User, Doctor and Admin authentication & validation with session uuid having.
 * Admin Features:
     * Administrator Role of the entire application
     * Only registered admins with valid session token can add/update/delete driver or customer from main database
     * Admin can access the details of different customers, drivers and trip bookings
-* Customer Features:
-    * Registering themselves with application, and logging in to get the valid session token
-    * Viewing list of available cabs and booking a trip
-    * Only logged in user can access his trip history, profile updation and other features.
+* User Features:
+    * Registering themselves with application, and logging in to it.
+    * Viewing list of available Center and booking a Appointment.
+    * Only logged in user can access profile updation and other features.
 
 ## Contributors
 
-* [@Raja Yadav](https://github.com/RajaYadav00)
-* [@Aniket Wagh](https://github.com/aniketw8)
-* [@Puja Kumari](https://github.com/Puja983542)
-* [@Rahul Kumar](https://github.com/rahulraka)
-* [@Najmush Saaquib](https://github.com/najmushsaaquib)
+* [Akhil Gonde](https://github.com/RajaYadav00)
+* [Aman Roy](https://github.com/aniketw8)
+* [Mohit Agarwal](https://github.com/Puja983542)
+* [Ravi Patel](https://github.com/rahulraka)
+* [Abusalem Mangalwedhe](https://github.com/Abusalem9)
 
 
 ## Installation & Run
 
-* Before running the API server, you should update the database config inside the [application.properties](E-Commerce-Backend\src\main\resources\application.properties) file. 
+* Before running the API server, you should update the database config inside the [application.properties](CovidVaccination\src\main\resources\application.properties) file. 
 * Update the port number, username and password as per your local database config.
 
 ```
-    server.port=8021
-
-    spring.datasource.url=jdbc:mysql://localhost:3306/cabdb;
+    server.port=8089
+    spring.datasource.url=jdbc:mysql://localhost:3306/CovidVaccination;
     spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
     spring.datasource.username=root
     spring.datasource.password=root
@@ -58,9 +57,9 @@
 
 ## API Root Endpoint
 
-`https://localhost:8021/`
+`https://localhost:8089/`
 
-`http://localhost:8021/swagger-ui.html`
+`http://localhost:8089/swagger-ui.html`
 
 
 ## API Module Endpoints
@@ -107,26 +106,19 @@
 
 ### Sample API Response for Customer Login
 
-`POST   localhost:80211/login/customer`
+`POST   localhost:8089/login/user`
 
 * Request Body
 
 ```
     {
-        "mobileId": "85022457580",
-        "password": "Clickme@007"
+        "Mobile": "85022457580",
+        "password": "pass@12"
     }
 ```
 
 * Response
 
 ```
-    {
-        "sessionId": 3,
-        "token": "0ad57094",
-        "userId": 9,
-        "userType": "customer",
-        "sessionStartTime": "2022-06-10T10:48:20.0109626",
-        "sessionEndTime": "2022-06-10T11:48:20.0109626"
-    }
+   Login Successful.
 ```
