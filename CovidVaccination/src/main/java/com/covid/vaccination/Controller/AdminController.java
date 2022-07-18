@@ -4,6 +4,9 @@ import com.covid.vaccination.Entity.*;
 import com.covid.vaccination.Implementation.*;
 import com.covid.vaccination.Repository.UserRepository;
 import com.covid.vaccination.Repository.VaccineStorageRepository;
+import com.covid.vaccination.Service.DoctorServices;
+import com.covid.vaccination.Service.Dose1Service;
+import com.covid.vaccination.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +15,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
 
 
     @Autowired
-    public UserServiceImpl usi;
+    public UserService usi;
 
     @Autowired
-    public DoctorServicesImp doctorServicesImp;
+    public DoctorServices doctorServicesImp;
     @Autowired
-    public Dose1ServiceImpl dose1Serviceimpl;
+    public Dose1Service dose1Serviceimpl;
 
     @Autowired
     public UserRepository userRepository;
@@ -29,77 +33,76 @@ public class AdminController {
     @Autowired
     public VaccineStorageRepository vaccineStorageRepository;
 
-    @GetMapping("/Admin/User/{id}")
+    @GetMapping("User/{id}")
     public User getUserById(@PathVariable("id") Integer id) {
         return usi.getUserById(id);
     }
 //    Get All Users
 
-    @GetMapping("/Admin/Users")
+    @GetMapping("Users")
     public List<User> getAllUserFromDB() {
         return usi.getAllUsers();
     }
 
-    @GetMapping("/Admin/Doctors/getAllDoctors")
+    @GetMapping("Doctors/getAllDoctors")
     public ResponseEntity<List<Doctor>> getAllDoctorFromDB() {
         return doctorServicesImp.getAllDoctors();
     }
-    @GetMapping("/Admin/Doctor/{dUserId}")
+    @GetMapping("Doctor/{dUserId}")
     public Doctor getDoctorFromDB(@PathVariable("dUserId") Integer dUserId) {
         return doctorServicesImp.getDoctor(dUserId);
     }
 
 
-    @GetMapping("/Admin/getAllDose1CompletedUsers")
+    @GetMapping("getAllDose1CompletedUsers")
     public List<Dose1> getAllDose1CompletedUsers(){
         return dose1Serviceimpl.getAllUser();
     }
-    @GetMapping("/Admin/BothDoseDone")
+    @GetMapping("BothDoseDone")
     public List<User> getAllDoseCompletedUsers(){
         return userRepository.getAllBothDoseCompleted();
     }
-    @GetMapping("/Admin/GetUserByAadhar/{AadharNo}")
+    @GetMapping("GetUserByAadhar/{AadharNo}")
     public User getUserByAadharNo(@PathVariable("AadharNo")String id){
         return userRepository.getUsersByAadharNo(id);
     }
-    @GetMapping("/Admin/GetUserByMobile/{Mobile}")
+    @GetMapping("GetUserByMobile/{Mobile}")
     public User getUserByMobileNo(@PathVariable("Mobile")String id){
         return userRepository.getUsersByMobileNo(id);
     }
-    @PostMapping("/Admin/createUser")
+    @PostMapping("createUser")
     public String createUser(@RequestBody User user){
         usi.saveUser(user);
         return "User Has Been Added Into DataBase.";
     }
-    @PostMapping("/Admin/createDoctor")
+    @PostMapping("createDoctor")
     public String createDoctor(@RequestBody Doctor doctor) {
         doctorServicesImp.addDoctor(doctor);
         return "Doctor Has Been Added Into DataBase.";
     }
-    @PutMapping("/Admin/updateUser")
+    @PutMapping("updateUser")
     public User updateUserByUsingId(@RequestBody User user,@RequestParam String key){
         return usi.updateUser(user,key);
     }
-//    @PutMapping("/Admin/updateDoctor")
+//    @PutMapping("updateDoctor")
 //    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor) {
 //
 //        return doctorServicesImp.updateDoctorDetails("1111",doctor);
 //    }
 
-    @DeleteMapping("/Admin/deleteUser/{id}")
+    @DeleteMapping("deleteUser/{id}")
     public User deleteUserByUserId(@PathVariable("id") Integer id){
-
         return usi.deleteUserById(id);
     }
 
-    @DeleteMapping("/Admin/deleteDoctor/{id}")
+    @DeleteMapping("deleteDoctor/{id}")
     public ResponseEntity<Doctor> deleteDoctorUsingId(@PathVariable("id") Integer id) {
 
         return doctorServicesImp.deleteDoctorById(id);
     }
     @Autowired
     public VaccineStorageServiceImpl vaccineStorageService;
-    @PostMapping("/Admin/AddingVaccineToCenter")
+    @PostMapping("AddingVaccineToCenter")
     public VaccineStorage AddingVaccineToCenter(@RequestBody VaccineStorage vaccineStorage) {
         return vaccineStorageService.save(vaccineStorage);
     }
@@ -115,7 +118,7 @@ public class AdminController {
         return new ResponseEntity<>(centerAddress, HttpStatus.OK);
     }
 
-    @GetMapping("/Admin/GetCenter/{id}")
+    @GetMapping("GetCenter/{id}")
     public ResponseEntity<centerAddress> getCenterById(@PathVariable("id")Integer id){
         centerAddress c= centerCreationService.getCenterAddressById(id);
         if(c!=null){
@@ -125,7 +128,7 @@ public class AdminController {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/Admin/GetAllCenter")
+    @GetMapping("GetAllCenter")
     public  ResponseEntity<List<centerAddress>> getAllAddress(){
         List<centerAddress> list = centerCreationService.getAllCenterList();
         if(list!=null){
@@ -135,7 +138,7 @@ public class AdminController {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping("/Admin/Delete/{id}")
+    @DeleteMapping("Delete/{id}")
     public ResponseEntity<centerAddress> deleteCenterById(@PathVariable("id")Integer id){
         centerAddress c=centerCreationService.deleteCenterById(id);
         if(c!=null){
@@ -145,17 +148,17 @@ public class AdminController {
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("/Admin/updateCenter")
+    @PutMapping("updateCenter")
     public centerAddress updateCenter(@RequestBody centerAddress center) {
         centerCreationService.saveCenterAddress(center);
         return center;
     }
 
-    @GetMapping ("/Admin/GetStorageCenterById")
+    @GetMapping ("GetStorageCenterById")
     public VaccineStorage getVaccineStorageByCenterId(@RequestParam Integer id){
         return vaccineStorageRepository.findByCenterID(id);
     }
-    @GetMapping("/Admin/GetAllCenterStorage")
+    @GetMapping("GetAllCenterStorage")
     public List<VaccineStorage> getAllCenterVaccineStorage(){
         return vaccineStorageRepository.findAll();
     }

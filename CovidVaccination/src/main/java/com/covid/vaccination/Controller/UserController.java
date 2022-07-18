@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     public  UserServiceImpl usi;
@@ -42,18 +43,18 @@ public class UserController {
 
     @Autowired
     public UserLoginServiceImpl userLoginService;
-    @PostMapping("/User/Login")
+    @PostMapping("Login")
     public UserLogin userLogin(@RequestBody UserLogin userLogin) {
         return userLoginService.login(userLogin);
     }
 
-    @PostMapping("/User/Logout")
+    @PostMapping("Logout")
     public String UserLogOut(@RequestBody UserLogin userLogin) {
         return userLoginService.logOut(userLogin);
     }
     @Autowired
     public CenterCreationServiceImpl centerCreationService;
-    @GetMapping("/User/GetAllCenter")
+    @GetMapping("GetAllCenter")
     public  ResponseEntity<List<centerAddress>> getAllAddress(){
         List<centerAddress> list = centerCreationService.getAllCenterList();
         if(list!=null){

@@ -1,15 +1,23 @@
 package com.covid.vaccination.Controller;
 
+import com.covid.vaccination.Entity.Appointment;
 import com.covid.vaccination.Entity.Doctor;
+import com.covid.vaccination.Entity.DoctorDoseGeneration;
 import com.covid.vaccination.Entity.DoctorLogin;
 import com.covid.vaccination.Implementation.DoctorLoginServiceImpl;
 import com.covid.vaccination.Implementation.DoctorServicesImp;
+import com.covid.vaccination.Implementation.DoseGenerationImpl;
+import com.covid.vaccination.Service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
+@RequestMapping("/doctor")
 public class DoctorController {
 
     @Autowired
@@ -21,12 +29,12 @@ public class DoctorController {
 
     @Autowired
     public DoctorLoginServiceImpl doctorLoginService;
-    @PostMapping("/Doctor/Login")
+    @PostMapping("Login")
     public DoctorLogin userLogin(@RequestBody DoctorLogin userLogin) {
         return doctorLoginService.login(userLogin);
     }
 
-    @PostMapping("/Doctor/Logout")
+    @PostMapping("Logout")
     public String DoctorLogOut(@RequestBody DoctorLogin userLogin) {
         return doctorLoginService.logOut(userLogin);
     }
@@ -38,6 +46,20 @@ public class DoctorController {
     @PutMapping("/updateDoctor")
     public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor, @RequestParam String password) throws Exception {
         return dsi.updateDoctorDetails(doctor,password);
+    }
+    @Autowired
+    public DoseGenerationImpl doseGenerationService;
+
+    @Autowired
+    public AppointmentService appointmentService;
+    @PostMapping("Dose/CreateDose")
+    public ResponseEntity<String> createDose(@RequestBody DoctorDoseGeneration doctorDoseGeneration){
+        return  new ResponseEntity<>(doseGenerationService.generatedDose(doctorDoseGeneration), HttpStatus.CREATED);
+
+    }
+    @GetMapping("/getAllAppointment")
+    public ResponseEntity<List<Appointment>> getAllAppointments(){
+        return appointmentService.getAllAppointment();
     }
 
 }
