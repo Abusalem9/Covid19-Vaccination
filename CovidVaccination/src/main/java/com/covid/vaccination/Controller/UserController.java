@@ -4,11 +4,10 @@ import com.covid.vaccination.Entity.Appointment;
 import com.covid.vaccination.Entity.User;
 import com.covid.vaccination.Entity.UserLogin;
 import com.covid.vaccination.Entity.centerAddress;
-import com.covid.vaccination.Implementation.AppointmentServiceImpl;
-import com.covid.vaccination.Implementation.CenterCreationServiceImpl;
-import com.covid.vaccination.Implementation.UserLoginServiceImpl;
-import com.covid.vaccination.Implementation.UserServiceImpl;
-import com.covid.vaccination.Repository.CenterAddressRepository;
+import com.covid.vaccination.Service.AppointmentService;
+import com.covid.vaccination.Service.UserLoginService;
+import com.covid.vaccination.Service.UserService;
+import com.covid.vaccination.Service.centerAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,29 +19,29 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    public  UserServiceImpl usi;
+    public UserService usi;
 
     @Autowired
-    public AppointmentServiceImpl appointmentService;
+    public AppointmentService appointmentService;
 //    Create User
-    @PostMapping("/createUser")
+    @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user){
         return new ResponseEntity<>(usi.saveUser(user),HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/updateUser")
+    @PutMapping("/update")
     public User updateUserByUsingId(@RequestBody User user,@RequestParam String password){
         return usi.updateUser(user,password);
     }
 
-    @PostMapping("/book/slot")
+    @PostMapping("/book")
     public ResponseEntity<Appointment> setAppointmentOfDose(@RequestBody Appointment appointment){
 
         return appointmentService.setAppointment(appointment);
     }
 
     @Autowired
-    public UserLoginServiceImpl userLoginService;
+    public UserLoginService userLoginService;
     @PostMapping("Login")
     public UserLogin userLogin(@RequestBody UserLogin userLogin) {
         return userLoginService.login(userLogin);
@@ -53,7 +52,7 @@ public class UserController {
         return userLoginService.logOut(userLogin);
     }
     @Autowired
-    public CenterCreationServiceImpl centerCreationService;
+    public centerAddressService centerCreationService;
     @GetMapping("GetAllCenter")
     public  ResponseEntity<List<centerAddress>> getAllAddress(){
         List<centerAddress> list = centerCreationService.getAllCenterList();

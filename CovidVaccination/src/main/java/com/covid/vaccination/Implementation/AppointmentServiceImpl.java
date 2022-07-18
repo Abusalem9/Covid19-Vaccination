@@ -52,8 +52,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                     Appointment optional = appointmentRepository.findByUser_id(appointment.getUser_id());
                     if (optional == null) {
                         Appointment result = appointmentRepository.save(appointment);
-
-
                         return new ResponseEntity<>(result, HttpStatus.OK);
                     } else
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Generated an Appointment Please Wait for Doctor Approval.");
