@@ -26,7 +26,7 @@
 * Admin Features:
     * Administrator Role of the entire application
     * Only registered admins with valid session token can add/update/delete driver or customer from main database
-    * Admin can access the details of different customers, drivers and trip bookings
+    * Admin can access the details of different Users, Doctors, Center and Dose.
 * User Features:
     * Registering themselves with application, and logging in to it.
     * Viewing list of available Center and booking a Appointment.
