@@ -57,9 +57,11 @@
 
 ## API Root Endpoint
 
-`https://localhost:8089/`
+`http://covid19vaccinationapi-env-1.eba-becpxd2x.ap-south-1.elasticbeanstalk.com/`
 
-`http://localhost:8089/swagger-ui.html`
+`http://covid19vaccinationapi-env-1.eba-becpxd2x.ap-south-1.elasticbeanstalk.com/v2/api-docs`
+
+`http://covid19vaccinationapi-env-1.eba-becpxd2x.ap-south-1.elasticbeanstalk.com/swagger-ui.html`
 
 
 ### Sample API Response for user Login
