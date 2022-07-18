@@ -66,7 +66,7 @@
 
 ### Sample API Response for user Login
 
-`POST   `http://covid19vaccinationapi-env-1.eba-becpxd2x.ap-south-1.elasticbeanstalk.com/swagger-ui.html#/user-controller/userLoginUsingPOST_1`
+`POST: http://covid19vaccinationapi-env-1.eba-becpxd2x.ap-south-1.elasticbeanstalk.com/swagger-ui.html#/user-controller/userLoginUsingPOST_1`
 
 * Request Body
 
