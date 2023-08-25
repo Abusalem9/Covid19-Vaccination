@@ -1,6 +1,6 @@
 # REST API for an Covid-19 Vaccination
 
-* We have developed this REST API for an Covid-19 Vaccination. This API performs all the fundamental CRUD operations of any Online Cab Booking platform with user validation at every step.
+* We have developed this REST API for an Covid-19 Vaccination. This API performs all the fundamental CRUD operations of any Online  Book Covid Vaccine Slot Near you booking platform with user validation at every step.
 * This project is developed by team of 5 Back-end Developers during project week in [Masai School](www.masaischool.com). 
 
 ## Tech Stack
